@@ -1,0 +1,6 @@
+
+{
+    "/products/list":"/products",
+    "/products/update/:id":"/products/:id",
+    "/products/get/favorite":"/products?favorite=1"
+}
