@@ -1,0 +1,16 @@
+@import '../../scss/index.scss';
+
+
+.products {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: $backgroundColor;
+
+    text-align: center;
+    color:$defaultLightColorFont;
+
+    &__title {
+        padding: 25px 0 50px 0;
+    }
+}
