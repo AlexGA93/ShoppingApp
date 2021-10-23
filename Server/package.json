@@ -1,0 +1,12 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --port 3000 --routes routes.json --watch db.json"
+  },
+  "author": "",
+  "license": "ISC"
+}
