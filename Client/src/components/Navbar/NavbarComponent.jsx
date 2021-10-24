@@ -14,8 +14,8 @@ const NavbarComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Navbar color="light" light expand="md" className="text-white">
-          <NavbarBrand href="/">VIKINGZ</NavbarBrand>
+        <Navbar color="light" light expand="md" className="navbar">
+          <NavbarBrand className="navbar__name" href="/">VIKINGZ</NavbarBrand>
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>

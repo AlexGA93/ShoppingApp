@@ -1,0 +1,44 @@
+@import '../../scss/index.scss';
+
+
+.products {
+    height: auto; //100%;
+    width: 100%;
+    position: absolute;
+    background-color: $backgroundColor;
+
+    
+    text-align: center;
+    
+    color:$defaultLightColorFont;
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        padding: 25px 0 50px 0;
+        align-items: center;
+        hr {
+            
+            border: 0;
+            width: 50%;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, #CCC, transparent); 
+        }
+    }
+
+    &__list {
+        // center div
+        margin: 0 auto;
+
+        //background-color: white;
+        width: 70%;
+
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-column-gap: 25px;
+        grid-row-gap: 25px;
+        
+    }
+}

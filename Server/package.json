@@ -1,12 +1,15 @@
 {
-  "name": "server",
+  "name": "Server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "json-server --port 3001 --routes routes.json --watch db.json"
+    "start": "json-server --watch db.json"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.0"
+  }
 }

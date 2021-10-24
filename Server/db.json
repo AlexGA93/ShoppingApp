@@ -8999,6 +8999,15 @@
       "price": 39,
       "productDescription": "Dolore quia et aliquid aut quia suscipit optio molestiae. Dolor magnam minima eos. Eos laborum sit dolores.",
       "favorite": "1"
+    },
+    {
+      "image_url": "https://dummyimage.com/400x400/74458/000&text=Refined Cotton Pants",
+      "stock": 40,
+      "productName": "New Item Test",
+      "price": 39,
+      "productDescription": "patata",
+      "favorite": "1",
+      "id": "jPVGA8B"
     }
   ]
 }
