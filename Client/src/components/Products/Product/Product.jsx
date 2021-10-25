@@ -21,9 +21,7 @@ const Product = (props) => {
                 <div className="product-container__info__price">
                     {stock>0 ? (
                         <p>${price}</p>
-                        ):(
-                            <p>???</p>
-                        )}
+                        ):null}
                     {/* <p>$ {price}</p> */}
                 </div>
                 <div className="product-container__info__stock">

@@ -15,7 +15,7 @@ const Products = () => {
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 6;
+    const productsPerPage = 8;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
@@ -57,12 +57,13 @@ const Products = () => {
                         }
                     )
                 } */}
-                
             </div>
             <div className="products__pagination">
             <ReactPaginate
                 previousLabel={"<"}
                 nextLabel={">"}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={1}
                 pageCount={pageCount}
                 onPageChange={changePage}
                 breakLabel={"."}

@@ -15,7 +15,12 @@ const MainPage = () => {
             </div>
             <div className="main-page__button">
                 <Link to="/store">
-                    <Button variant="contained" color="success">Go to Store!</Button>
+                    <Button 
+                    className="main-page__button_store" 
+                    variant="contained" 
+                    color="success">
+                        Go to Store!
+                    </Button>
                 </Link>
             </div>
         </div>
