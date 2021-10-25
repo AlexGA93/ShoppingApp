@@ -11,7 +11,7 @@ import Cart from './components/Cart/Cart';
 // redux store
 import store from './Redux/store/store';
 import {Provider} from 'react-redux';
-// action
+
 //actions
 import {getAllProducts} from './Redux/actions/shopping';
 
