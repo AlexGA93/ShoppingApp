@@ -14,13 +14,17 @@
     color:$defaultLightColorFont;
 
     &__title {
-        margin-top: 50px;
+        margin-top: 25px;
         font-size:$bigFontSize;
     }
     &__subtitle {
         font-size:$smallFontSize;
     }
 
-
-    
+    &__button {
+            &_store{
+                color: #000000;
+                text-decoration: none;
+            }; 
+    }
 }

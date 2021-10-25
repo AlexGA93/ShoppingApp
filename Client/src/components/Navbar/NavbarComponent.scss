@@ -1,7 +1,19 @@
 @import '../../scss/index.scss';
 
 .navbar {
+    color: $defaultLightColorFont;
     &__name {
         margin-left: 20px;
+    }
+
+    &__collapsed {
+        .navbar-nav {
+            .nav-item {
+                a{
+                    color:$defaultLightColorFont;
+                    margin-left: 20px;
+                }
+            }
+        }
     }
 }

@@ -27,18 +27,15 @@
 
     &__list {
         margin: 0 auto;
-
         width: 50%;
         height: auto;
-
         &__panel {
             justify-content: center;
             background-color: white;
             width: 100%;
-
-            p{color: black;}
+            p {
+                color: black;
+            }
         }
-
-
     }
 }
