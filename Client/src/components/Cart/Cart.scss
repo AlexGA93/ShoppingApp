@@ -1,0 +1,44 @@
+@import '../../scss/index.scss';
+
+.cart {
+    text-align: center;
+    background-color: $backgroundColor;
+    color:$defaultLightColorFont;
+
+    height: auto;
+    width: 100%;
+    position: absolute;
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        padding: 25px 0 50px 0;
+        align-items: center;
+        hr {
+            
+            border: 0;
+            width: 50%;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, #CCC, transparent); 
+        }
+    }
+
+    &__list {
+        margin: 0 auto;
+
+        width: 50%;
+        height: auto;
+
+        &__panel {
+            justify-content: center;
+            background-color: white;
+            width: 100%;
+
+            p{color: black;}
+        }
+
+
+    }
+}

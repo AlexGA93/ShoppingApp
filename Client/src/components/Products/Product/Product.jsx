@@ -8,7 +8,7 @@ import './Product.scss';
 const Product = (props) => {
     const {favorite, id, image_url, price, productDescription, productName, stock} = props.item;
     // console.log('patata');
-    //console.log(props.item);
+    console.log(props);
     return (
         <div className="product-container">
             <div className="product-container__img">
@@ -19,10 +19,20 @@ const Product = (props) => {
             </div>
             <div className="product-container__info">
                 <div className="product-container__info__price">
-                    <p>$ {price}</p>
+                    {stock>0 ? (
+                        <p>${price}</p>
+                        ):(
+                            <p>???</p>
+                        )}
+                    {/* <p>$ {price}</p> */}
                 </div>
                 <div className="product-container__info__stock">
-                    <p>Stock: {stock}</p>
+                    {stock>0 ? (
+                        <p>Stock: {stock}</p>
+                    ):(
+                        <p className="product-container__info__stock_out">Out of Stock</p>
+                    )}
+                    {/* <p>Stock: {stock}</p> */}
                 </div>
             </div>
             <div className="product-container__add">
