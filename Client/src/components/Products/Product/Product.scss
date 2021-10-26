@@ -25,6 +25,10 @@
             border-radius: 3%;
             margin-bottom: 20px;
         }
+
+        &__heart {
+            border-style: none;
+        }
     }
 
     &__info {
@@ -32,9 +36,15 @@
         flex-direction: row;
         justify-content: space-evenly;
 
+        &__price {
+            color: $backgroundColor;
+            font-size: $mediumFontSize;
+        }
+
         &__stock{
             &_out {
                 color: $defaultDangerColorFont;
+                font-size: $mediumFontSize;
             }
         }
     }

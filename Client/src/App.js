@@ -7,7 +7,7 @@ import MainPage from './Pages/MainPage/MainPage';
 import Products from './components/Products/Products';
 import Favs from './components/Favs/Favs';
 import Cart from './components/Cart/Cart';
-
+import Miniature from './components/Miniature/Miniature';
 // redux store
 import store from './Redux/store/store';
 import {Provider} from 'react-redux';
@@ -36,6 +36,7 @@ const App = () => {
           <Route path="/store" component={Products} />
           <Route path="/favorites" component={Favs} />
           <Route path="/cart" component={Cart} />
+          <Route path="/products/:id" component={Miniature} />
         </Switch>
       </Router>
     </Provider>

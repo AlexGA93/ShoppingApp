@@ -11,11 +11,11 @@ const Products = () => {
     // access to the state
     const stateProducts = useSelector(state => state.products);
 
-    console.log(stateProducts);
+    // console.log(stateProducts);
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 8;
+    const productsPerPage = 10;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
