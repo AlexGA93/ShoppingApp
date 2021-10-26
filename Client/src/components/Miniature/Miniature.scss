@@ -1,0 +1,63 @@
+@import '../../scss/index.scss';
+
+.product-banner {
+    text-align: center;
+    background-color: $backgroundColor;
+    color:$defaultLightColorFont;
+
+    height: auto;
+    width: 100%;
+    //position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        padding: 25px 0 50px 0;
+        align-items: center;
+        hr {
+            
+            border: 0;
+            width: 25%;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, #CCC, transparent); 
+        }
+    }
+    &__container {
+        margin-left:25%;
+
+        color: $defaultDarkColorFont;
+        background-color: $defaultLightColorFont;
+        width: 50%;
+        height: 600px;
+        justify-content: center;
+
+        &__img {
+            img {
+                margin: 20px 0 20px 0;
+                max-width: 300px;
+            }
+        }
+
+        &__desc {
+            margin:20px 150px 50px 150px;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            margin: 0 50px 20px 50px 0;
+        }
+
+    }
+}

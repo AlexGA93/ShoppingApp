@@ -19,7 +19,7 @@ const NavbarComponent = () => {
     const toggleNavbar = () => setCollapsed(!collapsed);
 
     return (
-      <Navbar color="faded" light lassName="navbar" className="navbar-dark bg-dark">
+      <Navbar color="faded" light className="navbar" className="navbar-dark bg-dark">
         <NavbarBrand href="/" className="mr-auto navbar__name">VIKINGZ</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar className="navbar__collapsed">
