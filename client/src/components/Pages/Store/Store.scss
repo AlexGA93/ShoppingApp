@@ -9,7 +9,7 @@
     
     text-align: center;
     
-    color:$defaultLightColorFont;
+    
 
     &__title {
         display: flex;
@@ -18,7 +18,7 @@
         
         padding: 25px 0 50px 0;
         align-items: center;
-        
+        color:$defaultLightColorFont;
         hr {
             border: 0;
             width: 50%;

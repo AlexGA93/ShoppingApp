@@ -12,14 +12,14 @@ import Store from './components/Pages/Store/Store';
 // redux store
 import store from './Redux/store/store';
 import {Provider} from 'react-redux';
-// action
+
 //actions
 import {getAllProducts} from './Redux/actions/shopping';
 
 // styles
 import './App.scss';
 
-const App = () => {
+const App = (): JSX.Element => {
   
   // redux store when DOM is updated
   useEffect(()=>{
@@ -31,21 +31,22 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavbarComponent />
+      {/* <NavbarComponent /> */}
       {/* <MainPage /> */}
-      <Store />
+      {/* <Store /> */}
         {/* <Product /> */}
 
 
-      {/* <Router>
+      <Router>
         <NavbarComponent />
          <Routes>
-          <Route exact path="/" component={MainPage} />
-          <Route path="/store" component={Products} />
-          <Route path="/favorites" component={Favs} />
-          <Route path="/cart" component={Cart} /> 
+           {/* React router v6 version */}
+          <Route path="/" element={<MainPage />} />
+          <Route path="/store" element={<Store />} />
+          {/* <Route path="/favorites" element={< Favs/>}/>
+          <Route path="/cart" element={<Cart />} /> */}
         </Routes> 
-      </Router> */}
+      </Router>
     </Provider>
   );
 }

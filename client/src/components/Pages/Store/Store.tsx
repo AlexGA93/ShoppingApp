@@ -26,7 +26,7 @@ const Products = () => {
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 8;
+    const productsPerPage = 12;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
