@@ -4,7 +4,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // components
 import NavbarComponent from './components/Navbar/NavbarComponent';
 import MainPage from './components/Pages/MainPage/MainPage';
-import Product from './components/Product/Product';
+//import Product from './components/Product/Product';
+import Store from './components/Pages/Store/Store';
 // import Favs from './components/Favs/Favs';
 // import Cart from './components/Cart/Cart';
 
@@ -26,13 +27,14 @@ const App = () => {
     store.dispatch(getAllProducts());
   }, [])
 
-console.log(store);
+//console.log(store);
 
   return (
     <Provider store={store}>
       <NavbarComponent />
       {/* <MainPage /> */}
-      <Product />
+      <Store />
+        {/* <Product /> */}
 
 
       {/* <Router>
