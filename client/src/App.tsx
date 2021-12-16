@@ -3,8 +3,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // components
 import NavbarComponent from './components/Navbar/NavbarComponent';
-// import MainPage from './Pages/MainPage/MainPage';
-// import Products from './components/Products/Products';
+import MainPage from './components/Pages/MainPage/MainPage';
+import Product from './components/Product/Product';
 // import Favs from './components/Favs/Favs';
 // import Cart from './components/Cart/Cart';
 
@@ -30,15 +30,20 @@ console.log(store);
 
   return (
     <Provider store={store}>
-      <Router>
+      <NavbarComponent />
+      {/* <MainPage /> */}
+      <Product />
+
+
+      {/* <Router>
         <NavbarComponent />
          <Routes>
           <Route exact path="/" component={MainPage} />
-          {/* <Route path="/store" component={Products} />
+          <Route path="/store" component={Products} />
           <Route path="/favorites" component={Favs} />
-          <Route path="/cart" component={Cart} />  */}
+          <Route path="/cart" component={Cart} /> 
         </Routes> 
-      </Router>
+      </Router> */}
     </Provider>
   );
 }

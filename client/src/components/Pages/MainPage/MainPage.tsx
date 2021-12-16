@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 import './MainPage.scss';
 
-const MainPage = () => {
+const MainPage = (): JSX.Element => {
     
     return (
         <div className="main-page">
@@ -15,9 +15,10 @@ const MainPage = () => {
                 <p>Click to access to the store!</p>
             </div>
             <div className="main-page__button">
-                <Link to="/store">
+                <Button variant="contained" color="success">Go to Store!</Button>
+                {/* <Link to="/store">
                     <Button variant="contained" color="success">Go to Store!</Button>
-                </Link>
+                </Link> */}
             </div>
         </div>
     )
