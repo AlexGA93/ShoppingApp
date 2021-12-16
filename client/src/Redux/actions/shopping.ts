@@ -23,7 +23,7 @@ export const getAllProducts = () => async (dispatch: (args: DispatchType) => (Di
     await api
     .get("/products")
     .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         
         dispatch({
             type: GET_ALL_PRODUCTS,
