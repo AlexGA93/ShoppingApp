@@ -7,7 +7,7 @@
       "productName": "Unbranded Metal Chair",
       "price": 43,
       "productDescription": "Porro tempore autem. Sunt molestias qui quod recusandae nemo quia optio. Nostrum aperiam officiis aut reprehenderit illo.",
-      "favorite": "1"
+      "favorite": 0
     },
     {
       "id": "20cc33f1-223b-4cf0-878d-fdedb3f60b56",
@@ -8998,7 +8998,7 @@
       "productName": "Refined Cotton Pants",
       "price": 39,
       "productDescription": "Dolore quia et aliquid aut quia suscipit optio molestiae. Dolor magnam minima eos. Eos laborum sit dolores.",
-      "favorite": "1"
+      "favorite": 0
     }
   ]
 }

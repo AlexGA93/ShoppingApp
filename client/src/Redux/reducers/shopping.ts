@@ -15,12 +15,14 @@ import {
     PAYDAY_ERROR
 } from '../actions/types';
 
+import { AppState } from '../type';
+
 //initial state
- const initialState = {
+ const initialState: AppState = {
      products:[],
      cart:[],
      loading: true,
-     error: {}
+     error: []
  }
 
  const product = (state=initialState, action: any): any => {
@@ -33,12 +35,31 @@ import {
                 products: payload,
                 loading: false
             }
-        case GET_ALL_FAVS_ERROR:
+
+        case ADD_TO_FAVS:
+
+            // inProducts
+            const inProducts = state.products.find((product): boolean => {
+                return product.id === payload.id
+            });
+
+            // inFavs
+            const inFavs = state.products.find((item): boolean => item.id === payload.id && item.favorite === payload.favorite ? true : false);
+            
+            return {
+                ...state,
+                products: inFavs ? state.products.map((item) =>  item.id === payload.id ? {...item, favorite:1} : item ):[...state.products, {...inProducts, favorite: 0}]
+            }
+            
+
+        case GET_ALL_PRODUCTS_ERROR:
+        case ADD_TO_FAVS_ERROR:
             return {
                 ...state,
                 error: payload,
                 loading: false
             }
+
         default:
             return state;
     }

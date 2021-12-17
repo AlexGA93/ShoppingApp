@@ -7,16 +7,16 @@ import thunk from 'redux-thunk';
 // combined reducers
 import shopping from '../reducers/shopping';
 
-const defaultStore = { 
-    products: [], 
+var defaultStore = { 
     cart: [],
+    error: [],
     loading: true,
-    error: {}
+    products:[]
 }
 
 
 //store
-const store = createStore(
+var store = createStore(
     shopping,
     defaultStore,
     composeWithDevTools(applyMiddleware(...[thunk]))
