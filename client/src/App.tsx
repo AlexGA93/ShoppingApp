@@ -6,8 +6,10 @@ import NavbarComponent from './components/Navbar/NavbarComponent';
 import MainPage from './components/Pages/MainPage/MainPage';
 //import Product from './components/Product/Product';
 import Store from './components/Pages/Store/Store';
-// import Favs from './components/Favs/Favs';
+import Favorites from './components/Pages/Favorites/Favorites';
 // import Cart from './components/Cart/Cart';
+
+
 
 // redux store
 import store from './Redux/store/store';
@@ -18,6 +20,7 @@ import {getAllProducts} from './Redux/actions/shopping';
 
 // styles
 import './App.scss';
+import { Toaster } from 'react-hot-toast';
 
 const App = (): JSX.Element => {
   
@@ -43,10 +46,15 @@ const App = (): JSX.Element => {
            {/* React router v6 version */}
           <Route path="/" element={<MainPage />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/favorites" element={<Favorites />}/>
           {/* <Route path="/favorites" element={< Favs/>}/>
           <Route path="/cart" element={<Cart />} /> */}
         </Routes> 
       </Router>
+      <Toaster   
+      position="top-right"
+      reverseOrder={true}/>
+      
     </Provider>
   );
 }
