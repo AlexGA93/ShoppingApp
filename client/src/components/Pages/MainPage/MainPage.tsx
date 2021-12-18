@@ -1,6 +1,7 @@
-import React from 'react';
+
 import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import HelmetIcon from '../../../imgs/helmet.png';
 
 import './MainPage.scss';
 
@@ -11,6 +12,9 @@ const MainPage = (): JSX.Element => {
             <div className="main-page">
                 <div className="main-page__title">
                     <h2>Welcome to Vikingz!</h2>
+                </div>
+                <div className="main-page__logo">
+                    <img src={HelmetIcon} style={{width:'300px'}}/>
                 </div>
                 <div className="main-page__subtitle">
                     <p>Click to access to the store!</p>

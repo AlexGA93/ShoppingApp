@@ -47,8 +47,6 @@ const App = (): JSX.Element => {
           <Route path="/" element={<MainPage />} />
           <Route path="/store" element={<Store />} />
           <Route path="/favorites" element={<Favorites />}/>
-          {/* <Route path="/favorites" element={< Favs/>}/>
-          <Route path="/cart" element={<Cart />} /> */}
         </Routes> 
       </Router>
       <Toaster   
