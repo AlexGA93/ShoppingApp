@@ -30,9 +30,9 @@ const Products = (): JSX.Element => {
     const stateProducts = useSelector<RootStateOrAny, elementProduct[]>(state => state.products);
     //console.log(stateProducts);
 
-    const displayProducts = stateProducts
-    .slice(pagesVisited, pagesVisited+productsPerPage)
-    .map( element => <Product className="products__list_element" key={element.id} element={element} />);
+    const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map( element => (
+        <Product className="products__list_element" key={element.id} element={element} />
+    ));
 
     const pageCount = Math.ceil(stateProducts.length / productsPerPage);
 

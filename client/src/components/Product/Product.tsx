@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import {useDispatch} from 'react-redux';
+import {Link} from "react-router-dom";
 
 // import {addToCart, addToFavs, outOfFavs} from '../../actions/shopping';
 // import { addToFavs, quitFromFavs } from '../../Redux/actions/shopping';
@@ -63,14 +64,14 @@ const Product = (props: any): JSX.Element => {
     
     return (
         <Card sx={{ maxWidth: 500 }} className="product-container">
-            
-            <CardMedia
-            component="img"
-            height="194"
-            image={element.image_url}
-            alt={element.productName}
-            />
-            
+                <Link to={`/products/product/${element.id}`}>
+                    <CardMedia
+                    component="img"
+                    height="194"
+                    image= {element.image_url}
+                    alt={element.productName}
+                    />
+                </Link>
             <CardContent>
                 <Typography  paragraph>
                     {element.productName}

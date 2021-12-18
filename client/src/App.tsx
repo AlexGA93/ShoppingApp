@@ -7,6 +7,7 @@ import MainPage from './components/Pages/MainPage/MainPage';
 //import Product from './components/Product/Product';
 import Store from './components/Pages/Store/Store';
 import Favorites from './components/Pages/Favorites/Favorites';
+import ProductInfo from './components/productInfo/ProductInfo';
 // import Cart from './components/Cart/Cart';
 
 
@@ -34,12 +35,6 @@ const App = (): JSX.Element => {
 
   return (
     <Provider store={store}>
-      {/* <NavbarComponent /> */}
-      {/* <MainPage /> */}
-      {/* <Store /> */}
-        {/* <Product /> */}
-
-
       <Router>
         <NavbarComponent />
          <Routes>
@@ -47,12 +42,12 @@ const App = (): JSX.Element => {
           <Route path="/" element={<MainPage />} />
           <Route path="/store" element={<Store />} />
           <Route path="/favorites" element={<Favorites />}/>
+          <Route path="/products/product/:id" element={<ProductInfo />} />
         </Routes> 
       </Router>
       <Toaster   
       position="top-right"
       reverseOrder={true}/>
-      
     </Provider>
   );
 }
