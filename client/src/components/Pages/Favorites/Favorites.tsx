@@ -16,7 +16,7 @@ const Favorites = (): JSX.Element => {
     return (
         <div className='favorites'>
             <div className="favorites__title">
-                <h1>Product List</h1>
+                <h1>Favorites</h1>
                 <hr />
             </div>
             <div className="favorites__list">
