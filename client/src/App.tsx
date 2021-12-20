@@ -17,7 +17,7 @@ import store from './Redux/store/store';
 import {Provider} from 'react-redux';
 
 //actions
-import {getAllProducts} from './Redux/actions/shopping';
+import {getAllProducts, getAllFavs} from './Redux/actions/shopping';
 
 // styles
 import './App.scss';
@@ -27,8 +27,9 @@ const App = (): JSX.Element => {
   
   // redux store when DOM is updated
   useEffect(()=>{
-    //dispatch 'get products' action
+    // dispatch 'get products' action
     store.dispatch(getAllProducts());
+    store.dispatch(getAllFavs());
   }, [])
 
 //console.log(store);

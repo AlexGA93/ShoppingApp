@@ -22,7 +22,7 @@ const Products = (): JSX.Element => {
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 24;
+    const productsPerPage = 6;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
@@ -43,9 +43,9 @@ const Products = (): JSX.Element => {
     return (
         <div className="products">
             <div className="products__title">
-                <img src={Axes} style={{width:'70px'}}/>
+                <img alt="axes" src={Axes} style={{width:'70px'}}/>
                 <h1>Product List</h1>
-                <img src={Axes} style={{width:'70px'}}/>
+                <img alt="axes" src={Axes} style={{width:'70px'}}/>
             </div>
             <hr />
             <div className="products__list">

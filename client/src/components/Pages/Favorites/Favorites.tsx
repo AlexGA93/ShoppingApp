@@ -6,6 +6,9 @@ import Product from '../../Product/Product';
 import './Favorites.scss';
 
 const Favorites = (): JSX.Element => {
+    // useEffect(() => {
+    //     getAllFavs();
+    // }, [])
 
     const favs: elementProduct[] = [];
 
