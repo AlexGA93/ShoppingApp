@@ -1,4 +1,5 @@
 // File that holds the typescript types
+export declare type typeActions = string;
 
 // product array element type
 export declare interface elementProduct {
@@ -13,10 +14,10 @@ export declare interface elementProduct {
 
 // state element type
 export declare interface AppState {
+    products: elementProduct[],
+    favs:elementProduct[],
     cart: elementProduct[],
-    error: string[],
-    loading: boolean,
-    products: elementProduct[]
+    error: string[]
 }
 
 // Dispatch action type

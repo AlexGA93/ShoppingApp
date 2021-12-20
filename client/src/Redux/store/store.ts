@@ -8,10 +8,10 @@ import thunk from 'redux-thunk';
 import shopping from '../reducers/shopping';
 
 var defaultStore = { 
-    cart: [],
-    error: [],
-    loading: true,
-    products:[]
+    products:[],
+    favs:[],
+    cart:[],
+    error: []
 }
 
 
