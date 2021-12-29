@@ -1,7 +1,7 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { elementProduct } from '../../Redux/type';
+import { IelementProduct } from '../../Redux/type';
 
 import EuroIcon from '@mui/icons-material/Euro';
 
@@ -9,7 +9,7 @@ import './productInfo.scss';
 
 const ProductInfo = () => {
     // extract id from state
-    let stateProducts = useSelector<RootStateOrAny, elementProduct[]>((state) => state.products);
+    let stateProducts = useSelector<RootStateOrAny, IelementProduct[]>((state) => state.products);
     
     let product = stateProducts.find((element) => element.id===window.location.pathname.split("/").pop());
     // console.log(product);

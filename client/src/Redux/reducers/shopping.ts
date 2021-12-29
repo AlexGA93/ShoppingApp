@@ -1,51 +1,57 @@
 import * as types from '../actions/types';
 
-import { AppState } from '../type';
+import { IelementProduct, DispatchTypes, IAppState } from '../type';
 
 //initial state
- const initialState: AppState = {
+ const initialState: IAppState = {
     products:[],
     favs:[],
     cart:[],
     error: []
  }
 
- const product = (state=initialState, action: any): any => {
-    const {type, payload} = action;
+ const product = (state=initialState, action: DispatchTypes): any => {
+    
 
-    switch(type){
+    switch(action.type){
         case types.GET_ALL_PRODUCTS:
             return {
                 ...state,
-                products: payload,
+                products: action.payload,
             }
         case types.GET_ALL_FAVS:
             return {
                 ...state,
-                favs: payload,
+                favs: action.payload,
             }    
         case types.ADD_TO_FAVS:
 
             // inProducts
-            const inProducts = state.products.find((product): boolean => {
-                return product.id === payload.id
-            });
+            // const inProducts = state.products.find((product): boolean => {
+            //     return product.id === action.payload.id
+            // });
 
             // inFavs
-            const inFavs = state.products.find((item): boolean => item.id === payload.id && item.favorite === payload.favorite ? true : false);
+            //const inFavs = state.products.find((item): boolean => item.id === action.payload.id && item.favorite === action.payload.favorite ? true : false);
             
-            return {
-                ...state,
-                products: inFavs ? state.products.map((item) =>  item.id === payload.id ? {...item, favorite:1} : item ):[...state.products, {...inProducts, favorite: 0}]
-            }
+            // return {
+            //     ...state,
+            //     products: inFavs ? state.products.map((item) =>  item.id === action.payload.id ? {...item, favorite:1} : item ):[...state.products, {...inProducts, favorite: 0}]
+            // }
+        case types.ADD_TO_CART:
+            // is in cart?
+            // const inCart = state.cart.find((item): boolean => item.id === action.payload.id ? true : false);
+            
+            // return {
+            //     ...state,
+            //     // cart: inCart ? null : state.cart.push({...action.payload, qty:1})
+            // }
         case types.GET_ALL_PRODUCTS_ERROR:
         case types.GET_ALL_FAVS_ERROR:
         case types.ADD_TO_FAVS_ERROR:
-        // case types.ADD_TO_CART:
-        
             return {
                 ...state,
-                error: payload,
+                error: action.payload,
             }
         default:
             return state;

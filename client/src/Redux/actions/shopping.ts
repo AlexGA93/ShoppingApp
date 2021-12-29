@@ -18,15 +18,13 @@ import {
 
     
 } from './types';
-
 import api from '../../api/products';
-
-import {elementProduct, DispatchType} from '../type';
-import { dispatch } from 'react-hot-toast/dist/core/store';
-
+import {Dispatch} from 'redux';
+import {IelementProduct, DispatchTypes} from '../type';
 
 
-export const getAllProducts = () => async (dispatch: (args: DispatchType) => (DispatchType)) => {
+
+export const getAllProducts = () => async (dispatch: Dispatch<DispatchTypes>) => {
     await api
     .get("/products/list")
     .then((response) => {
@@ -49,7 +47,7 @@ export const getAllProducts = () => async (dispatch: (args: DispatchType) => (Di
     
 }
 // FAVORITES
-export const getAllFavs = () => async (dispatch: (args: DispatchType) => (DispatchType)) => {
+export const getAllFavs = () => async (dispatch: Dispatch<DispatchTypes>) => {
     await api
     .get("/products/get/favorite")
     .then((response) => {
@@ -69,7 +67,7 @@ export const getAllFavs = () => async (dispatch: (args: DispatchType) => (Dispat
     //console.log('get all favs');
     
 }
-export const addToFavs = (productData: elementProduct) => async (dispatch: (args: DispatchType) => (DispatchType)) => {
+export const addToFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
     await api
     .patch(`/products/${productData.id}`, {favorite: 1})
     .then((element) => {
@@ -93,7 +91,7 @@ export const addToFavs = (productData: elementProduct) => async (dispatch: (args
     // console.log('ADD to favs');
     
 };
-export const quitFromFavs = (productData: elementProduct) => async (dispatch: (args: DispatchType) => (DispatchType)) => {
+export const quitFromFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
     await api
     .patch(`/products/${productData.id}`, {favorite: 0})
     .then((element) => {
@@ -116,21 +114,20 @@ export const quitFromFavs = (productData: elementProduct) => async (dispatch: (a
     
 };
 // CART
-export const addToCart = (productData: elementProduct) => async (dispatch: (args: DispatchType) => (DispatchType)) => {
-    // console.log('STONKS! C:');
-    // console.log(productData);
-    // try{
-    //     dispatch({
-    //         type: ADD_TO_CART,
-    //         payload: productData
-    //     });
-    // }catch(err){
-    //     dispatch({
-    //         type: ADD_TO_CART_ERROR,
-    //         payload: err
-    //     });
-    // }
+export const addToCart = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
+    
+    console.log(productData);
+    try{
+        dispatch({
+            type: ADD_TO_CART,
+            payload: productData
+        });
+    }catch(err){
+        // dispatch({
+        //     type: ADD_TO_CART_ERROR,
+        //     payload: err
+        // });
+    }
 
-    console.log('add to cart');
     
 };

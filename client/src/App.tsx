@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // components
@@ -10,11 +10,9 @@ import Favorites from './components/Pages/Favorites/Favorites';
 import ProductInfo from './components/productInfo/ProductInfo';
 // import Cart from './components/Cart/Cart';
 
-
-
 // redux store
-import store from './Redux/store/store';
-import {Provider} from 'react-redux';
+// import store from './Redux/store/store';
+import {useDispatch} from 'react-redux';
 
 //actions
 import {getAllProducts, getAllFavs} from './Redux/actions/shopping';
@@ -24,32 +22,32 @@ import './App.scss';
 import { Toaster } from 'react-hot-toast';
 
 const App = (): JSX.Element => {
-  
+  const dispatch = useDispatch();
   // redux store when DOM is updated
   useEffect(()=>{
     // dispatch 'get products' action
-    store.dispatch(getAllProducts());
-    store.dispatch(getAllFavs());
-  }, [])
+    dispatch(getAllProducts());
+    dispatch(getAllFavs());
+  }, [dispatch])
 
 //console.log(store);
 
   return (
-    <Provider store={store}>
-      <Router>
-        <NavbarComponent />
-         <Routes>
-           {/* React router v6 version */}
-          <Route path="/" element={<MainPage />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/favorites" element={<Favorites />}/>
-          <Route path="/products/product/:id" element={<ProductInfo />} />
-        </Routes> 
-      </Router>
-      <Toaster   
-      position="top-right"
-      reverseOrder={true}/>
-    </Provider>
+      <Fragment>
+        <Router>
+          <NavbarComponent />
+            <Routes>
+              {/* React router v6 version */}
+            <Route path="/" element={<MainPage />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/favorites" element={<Favorites />}/>
+            <Route path="/products/product/:id" element={<ProductInfo />} />
+          </Routes> 
+        </Router>
+        <Toaster   
+        position="top-right"
+        reverseOrder={true}/>
+      </Fragment>
   );
 }
 
