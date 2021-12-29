@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 import Axes from '../../../imgs/axes.png';
 
-import {elementProduct} from '../../../Redux/type'
+import {IelementProduct} from '../../../Redux/type'
 
 import './Store.scss';
 
@@ -27,7 +27,7 @@ const Products = (): JSX.Element => {
     const pagesVisited = pageNumber*productsPerPage;
 
     //access to the state
-    const stateProducts = useSelector<RootStateOrAny, elementProduct[]>(state => state.products);
+    const stateProducts = useSelector<RootStateOrAny, IelementProduct[]>(state => state.products);
     //console.log(stateProducts);
 
     const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map( element => (

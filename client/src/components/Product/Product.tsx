@@ -25,7 +25,7 @@ import SellIcon from '@mui/icons-material/Sell';
 
 import './Product.scss';
 
-import { elementProduct } from '../../Redux/type';
+import { IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
 //import { color } from '@mui/system';
 
@@ -33,7 +33,7 @@ import toast from 'react-hot-toast';
 
 
 const Product = (props: any): JSX.Element => {
-    let element: elementProduct = props.element;
+    let element: IelementProduct = props.element;
     //extract element details const {favorite, id, image_url, price, productDescription, productName, stock } = element.element;
 
     const {addToFavs, quitFromFavs, addToCart} = bindActionCreators(actionCreators, useDispatch());

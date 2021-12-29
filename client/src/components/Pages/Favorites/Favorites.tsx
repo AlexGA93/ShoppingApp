@@ -1,6 +1,6 @@
 import React from 'react'
 import { RootStateOrAny, useSelector } from 'react-redux'
-import { elementProduct } from '../../../Redux/type';
+import { IelementProduct } from '../../../Redux/type';
 import Product from '../../Product/Product';
 
 import './Favorites.scss';
@@ -10,9 +10,9 @@ const Favorites = (): JSX.Element => {
     //     getAllFavs();
     // }, [])
 
-    const favs: elementProduct[] = [];
+    const favs: IelementProduct[] = [];
 
-    const stateProducts = useSelector<RootStateOrAny, elementProduct[]>((state) => state.products);
+    const stateProducts = useSelector<RootStateOrAny, IelementProduct[]>((state) => state.products);
 
     stateProducts.map(product =>{if ( product.favorite === 1) favs.push(product)});
     
