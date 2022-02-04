@@ -4,11 +4,12 @@ import ReactPaginate from "react-paginate";
 
 import Axes from '../../../imgs/axes.png';
 
-import {IelementProduct} from '../../../Redux/type'
+import {IAppState, IelementProduct} from '../../../Redux/type'
 
 import './Store.scss';
 
 import Product from '../../Product/Product';
+import { rootStore } from '../../../Redux';
 
 
 
@@ -27,20 +28,20 @@ const Products = (): JSX.Element => {
     const pagesVisited = pageNumber*productsPerPage;
 
     //access to the state
-    const stateProducts = useSelector<RootStateOrAny, IelementProduct[]>(state => state.products);
-    //console.log(stateProducts);
-
-    const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map( element => (
+    const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    
+    const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
         <Product className="products__list_element" key={element.id} element={element} />
     ));
 
-    const pageCount = Math.ceil(stateProducts.length / productsPerPage);
+    const pageCount = Math.ceil((stateProducts? stateProducts.length: 0 )/ productsPerPage);
 
     const changePage = ({ selected }: SelectedPagination) => {
         setPageNumber(selected);
     };
 
     return (
+       
         <div className="products">
             <div className="products__title">
                 <img alt="axes" src={Axes} style={{width:'70px'}}/>
