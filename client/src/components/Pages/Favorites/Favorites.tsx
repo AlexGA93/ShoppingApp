@@ -1,20 +1,17 @@
-import React from 'react'
-import { RootStateOrAny, useSelector } from 'react-redux'
-import { IelementProduct } from '../../../Redux/type';
+import React, { useEffect } from 'react'
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
+import { rootStore } from '../../../Redux';
+import { getAllFavs } from '../../../Redux/actions/shopping';
+import { IAppState, IelementProduct } from '../../../Redux/type';
 import Product from '../../Product/Product';
 
 import './Favorites.scss';
 
 const Favorites = (): JSX.Element => {
-    // useEffect(() => {
-    //     getAllFavs();
-    // }, [])
 
-    const favs: IelementProduct[] = [];
-
-    const stateProducts = useSelector<RootStateOrAny, IelementProduct[]>((state) => state.products);
-
-    stateProducts.map(product =>{if ( product.favorite === 1) favs.push(product)});
+    // const stateFavs = useSelector((state: rootStore) => state.shopping?.favs);
+    const stateFavs = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
+    
     
     return (
         <div className='favorites'>
@@ -24,14 +21,13 @@ const Favorites = (): JSX.Element => {
             </div>
             <div className="favorites__list">
             {
-                favs.length !==0 ? (
-                    favs.map(element => (
+                stateFavs && stateFavs.length!==0 ? (
+                    stateFavs.map((element: IelementProduct) => (
                         <Product className="products__list_element" key={element.id} element={element} />
                     ))
                 ):(
                     <h2>It seems that there's nothing here...</h2>
                 )
-                
             }
             </div>
         </div>
