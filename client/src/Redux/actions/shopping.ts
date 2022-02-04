@@ -20,34 +20,29 @@ import {
 } from './types';
 import api from '../../api/products';
 import {Dispatch} from 'redux';
-import {IelementProduct, DispatchTypes} from '../type';
+import {ActionTypes, IelementProduct} from '../type';
 
 
 
-export const getAllProducts = () => async (dispatch: Dispatch<DispatchTypes>) => {
+export const getAllProducts = () => async (dispatch: Dispatch<ActionTypes>) => {
     await api
     .get("/products/list")
     .then((response) => {
-        // console.log(response.data);
-        
         dispatch({
             type: GET_ALL_PRODUCTS,
             payload: response.data
         });
     })
     .catch((err) => {
-        console.log(err.message);
-        
         dispatch({
             type: GET_ALL_PRODUCTS_ERROR,
-            payload: err.message
+            payload: err.message// err.response.statusText
         });
     })
-    // console.log('get all products');
     
 }
 // FAVORITES
-export const getAllFavs = () => async (dispatch: Dispatch<DispatchTypes>) => {
+export const getAllFavs = () => async (dispatch: Dispatch<ActionTypes>) => {
     await api
     .get("/products/get/favorite")
     .then((response) => {
@@ -58,76 +53,71 @@ export const getAllFavs = () => async (dispatch: Dispatch<DispatchTypes>) => {
         });
     })
     .catch((err) => {
-        // console.log(err.message);
+        // console.log(err);
         dispatch({
             type: GET_ALL_FAVS_ERROR,
             payload: err.message
         });
     })
-    //console.log('get all favs');
     
 }
-export const addToFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
+export const addToFavs = (productData: IelementProduct) => async (dispatch: Dispatch<ActionTypes>) => {
     await api
     .patch(`/products/${productData.id}`, {favorite: 1})
     .then((element) => {
-        //console.log(`${productData.productName} added to favorites`);
-        // console.log(element.data);
-        
-        // dispatch
         dispatch({
             type: ADD_TO_FAVS,
             payload: element.data
         });
     })
     .catch((err) => {
-        console.log(err);
         dispatch({
             type: ADD_TO_FAVS_ERROR,
-            payload: err
+            payload: "Add to Favs Error"
         });
     })
-    
-    // console.log('ADD to favs');
-    
 };
-export const quitFromFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
-    await api
-    .patch(`/products/${productData.id}`, {favorite: 0})
-    .then((element) => {
-        // console.log(`${productData.productName} deleted from favorites`);
-        // console.log(element.data);
+
+export const quitFromFavs = () =>{}
+// export const quitFromFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
+//     await api
+//     .patch(`/products/${productData.id}`, {favorite: 0})
+//     .then((element) => {
+//         // console.log(`${productData.productName} deleted from favorites`);
+//         // console.log(element.data);
         
-        dispatch({
-            type: OUT_OF_FAVS,
-            payload: element.data
-        });
-    })
-    .catch((err) => {
+//         dispatch({
+//             type: OUT_OF_FAVS,
+//             payload: element.data
+//         });
+//     })
+//     .catch((err) => {
 
-        dispatch({
-            type: OUT_OF_FAVS_ERROR,
-            payload: err
-        });
-    })
-    // console.log('QUIT from favs');
+//         dispatch({
+//             type: OUT_OF_FAVS_ERROR,
+//             payload: err.response.statusText
+//         });
+//     })
+//     // console.log('QUIT from favs');
     
-};
-// CART
-export const addToCart = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
+// };
+// // CART
+// export const addToCart = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
     
-    console.log(productData);
-    try{
-        dispatch({
-            type: ADD_TO_CART,
-            payload: productData
-        });
-    }catch(err){
-        // dispatch({
-        //     type: ADD_TO_CART_ERROR,
-        //     payload: err
-        // });
-    }
+//     // console.log(productData);
+//     try{
+//         dispatch({
+//             type: ADD_TO_CART,
+//             payload: productData
+//         });
+//     }catch(err){
+//         console.log(err);
+        
+//         // dispatch({
+//         //     type: ADD_TO_CART_ERROR,
+//         //     payload: err.response.statusText
+//         // });
+//     }
 
     
-};
+//};
