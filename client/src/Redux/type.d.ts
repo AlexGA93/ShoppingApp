@@ -1,37 +1,30 @@
-import { ActionType } from 'typesafe-actions';
-import * as actions from './actions/shopping';
 
 // File that holds the typescript types
 export declare type typeActions = string;
 
 // product array element type
 export declare interface IelementProduct {
+    favorite: number
     id: string,
     image_url: string,
-    stock: number,
-    productName: string,
     price: number,
     productDescription: string,
-    favorite: number
-}
+    productName: string,
+    stock: number
+};
 
 // state element type
 export declare interface IAppState {
-    products: elementProduct[],
-    favs:elementProduct[],
-    cart: elementProduct[],
-    error: string[]
-}
+    shopping:{
+        products: IelementProduct[],
+        favs:IelementProduct[],
+        cart: IelementProduct[]
+    }
+};
 
-export declare interface ISuccessAction {
-    type: string,
-    payload: IelementProduct
-}
+export declare type stateActions = IelementProduct | IelementProduct[] | string;
 
-export declare interface IErrorAction {
-    type: string,
-    payload: string
-}
-
-// dispatch type
-export type DispatchTypes = ISuccessAction | IErrorAction;
+export type ActionTypes = 
+| {type: string, payload: IelementProduct} // get a single product
+| {type: string, payload: IelementProduct[]} // get all products favs or not
+| {type: string, payload: string} // error
