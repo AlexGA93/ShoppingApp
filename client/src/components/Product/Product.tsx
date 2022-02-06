@@ -36,7 +36,7 @@ const Product = (props: any): JSX.Element => {
     let element: IelementProduct = props.element;
     //extract element details const {favorite, id, image_url, price, productDescription, productName, stock } = element.element;
 
-    const {addToFavs, quitFromFavs, addToCart} = bindActionCreators(actionCreators, useDispatch());
+    const {addToFavs} = bindActionCreators(actionCreators, useDispatch()); //, quitFromFavs, addToCart
 
     const addToFavsMethod = (name: string): void => {
         toast(`${name} added to Favorites!!`,
@@ -62,11 +62,11 @@ const Product = (props: any): JSX.Element => {
             },
         }
         );
-        quitFromFavs(element);
+        // quitFromFavs(element);
     };
 
     const toggleBuy = () => {
-        addToCart(element);
+        // addToCart(element);
     };
     
     return (
