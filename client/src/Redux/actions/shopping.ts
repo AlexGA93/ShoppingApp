@@ -78,27 +78,22 @@ export const addToFavs = (productData: IelementProduct) => async (dispatch: Disp
     })
 };
 
-export const quitFromFavs = () =>{}
-// export const quitFromFavs = (productData: IelementProduct) => async (dispatch: Dispatch<DispatchTypes>) => {
-//     await api
-//     .patch(`/products/${productData.id}`, {favorite: 0})
-//     .then((element) => {
-//         // console.log(`${productData.productName} deleted from favorites`);
-//         // console.log(element.data);
-        
-//         dispatch({
-//             type: OUT_OF_FAVS,
-//             payload: element.data
-//         });
-//     })
-//     .catch((err) => {
-
-//         dispatch({
-//             type: OUT_OF_FAVS_ERROR,
-//             payload: err.response.statusText
-//         });
-//     })
-//     // console.log('QUIT from favs');
+export const quitFromFavs = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
+    await api
+    .patch(`/products/${productData.id}`, {favorite:0})
+    .then((element) => {
+        dispatch({
+            type: OUT_OF_FAVS,
+            payload: element.data
+        })
+    })
+    .catch((err) => {
+        dispatch({
+            type: OUT_OF_FAVS_ERROR,
+            payload: "Out of Favs Error"
+        });
+    })
+}
     
 // };
 // // CART
