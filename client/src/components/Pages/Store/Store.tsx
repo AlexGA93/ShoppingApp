@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {RootStateOrAny, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
 import ReactPaginate from "react-paginate";
 
 import Axes from '../../../imgs/axes.png';
@@ -10,6 +10,8 @@ import './Store.scss';
 
 import Product from '../../Product/Product';
 import { rootStore } from '../../../Redux';
+import { dispatch } from 'react-hot-toast/dist/core/store';
+import { getAllProducts } from '../../../Redux/actions/shopping';
 
 
 
@@ -18,8 +20,12 @@ interface SelectedPagination {
 }
 
 
-const Products = (): JSX.Element => {
-    // console.log(stateProducts);
+const Store = (): JSX.Element => {
+    //access to the state
+    const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    //console.log(stateProducts);
+    
+    
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
@@ -27,11 +33,10 @@ const Products = (): JSX.Element => {
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
-    //access to the state
-    const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    
     
     const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
-        <Product className="products__list_element" key={element.id} element={element} />
+        <Product className="products__list_element" key={element.id} id={element.id} />
     ));
 
     const pageCount = Math.ceil((stateProducts? stateProducts.length: 0 )/ productsPerPage);
@@ -39,6 +44,12 @@ const Products = (): JSX.Element => {
     const changePage = ({ selected }: SelectedPagination) => {
         setPageNumber(selected);
     };
+
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(getAllProducts());
+    // }, [dispatch]);
 
     return (
        
@@ -75,4 +86,4 @@ const Products = (): JSX.Element => {
 
 
 
-export default Products;
+export default Store;

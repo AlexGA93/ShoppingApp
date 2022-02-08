@@ -34,7 +34,7 @@
       "productName": "Gorgeous Frozen Chair",
       "price": 47,
       "productDescription": "Harum modi sunt. Voluptatem ut molestiae consequatur. Ea omnis architecto laboriosam accusantium reiciendis corporis exercitationem ad dolor. Fugit autem placeat voluptas sint aut aliquam sed. Totam fuga nesciunt rerum voluptatibus. Voluptatibus voluptates vel ut et temporibus perferendis laboriosam accusamus.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "41fb4f07-22fd-4ef6-b23c-1ac022b57d11",
@@ -43,7 +43,7 @@
       "productName": "Incredible Fresh Ball",
       "price": 71,
       "productDescription": "Eveniet aliquid quisquam eveniet quam. Porro autem dolorem repellat minus occaecati neque non aperiam. Quaerat aut quia dolor illo et. Voluptatibus nemo eos eum.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "b590e450-1e0c-4344-92b8-e1f6cc260587",
@@ -52,7 +52,7 @@
       "productName": "Fantastic Wooden Sausages",
       "price": 1,
       "productDescription": "Ea qui et. Minus minima omnis. Nisi temporibus quam vel doloribus tempore ut possimus repellendus minus. Aut et repudiandae et dolorum ut consectetur. Qui laborum tenetur corporis odit architecto. Rerum neque odit.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "faaa0716-e8d1-4750-ae0d-da9e0db57b70",
@@ -61,7 +61,7 @@
       "productName": "Practical Frozen Cheese",
       "price": 50,
       "productDescription": "Vel eius vitae eaque. Delectus temporibus consequatur quasi labore et ratione architecto dolor nemo. Molestias maiores dolorem quo sit omnis omnis. Ad ut voluptatibus occaecati non quaerat libero pariatur.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "23977b2e-2e47-49c6-b9b9-bd180d5cdb8c",
@@ -70,7 +70,7 @@
       "productName": "Intelligent Cotton Shoes",
       "price": 47,
       "productDescription": "Dolores numquam nisi illum voluptates illo quas officia dicta. Error ipsa similique ratione corporis ullam. Et at autem ut itaque dolores. Nihil enim deleniti omnis atque dicta aliquid aliquid. Ipsa corrupti hic culpa. Ullam libero ea nihil harum eum ut ipsa eum.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "2780b977-1be8-43a0-b07e-7546ece18fde",
@@ -79,7 +79,7 @@
       "productName": "Tasty Wooden Fish",
       "price": 96,
       "productDescription": "Sunt saepe delectus voluptatum. Maxime vel aperiam porro consequatur perferendis impedit non debitis asperiores. Consequatur qui facilis ea harum numquam iste ut aut. Quas qui aut dolores sunt doloremque est illo.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "57a1855d-1e9e-4d5c-a4c1-ab0d1c7f9381",
@@ -88,7 +88,7 @@
       "productName": "Gorgeous Metal Keyboard",
       "price": 85,
       "productDescription": "Consequatur consectetur id odit. Et qui accusantium quas sed deserunt. Tempore harum ipsa dolorem.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "6319f692-1772-424f-978b-95c1eb857e01",
@@ -97,7 +97,7 @@
       "productName": "Intelligent Rubber Pizza",
       "price": 42,
       "productDescription": "Aut minima nesciunt eligendi voluptate at quia doloremque eum et. Est est cupiditate dicta repudiandae suscipit distinctio quia voluptate. Ut illo voluptatem. Veniam ut delectus et est enim.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "4d22f822-2727-4b9b-aa05-071373f1876b",
@@ -106,7 +106,7 @@
       "productName": "Intelligent Steel Car",
       "price": 82,
       "productDescription": "Repellat consequatur vitae eum vel voluptatibus. Dicta voluptas error unde. Amet labore dolor ratione quam ad sit et velit.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "9d17a1e3-fbf4-4ade-9c79-50f01e85de40",
@@ -115,7 +115,7 @@
       "productName": "Small Wooden Bike",
       "price": 93,
       "productDescription": "Et sed aut ut. Corporis odio modi vel quo rerum quis placeat hic. Rerum enim magnam excepturi voluptatem possimus repudiandae.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "1c1083d8-ae57-48aa-8d18-3f0cf4db0ad3",
@@ -124,7 +124,7 @@
       "productName": "Gorgeous Rubber Pants",
       "price": 11,
       "productDescription": "Ut ad natus hic. Ut voluptatem dolores explicabo corrupti non consequuntur doloremque quibusdam qui. Laborum est beatae commodi nihil odio. Corrupti aut nobis. Est ea explicabo laborum esse recusandae.",
-      "favorite": 1
+      "favorite": 0
     }
   ]
 }

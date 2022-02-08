@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from "react-router-dom";
 
 // import {addToCart, addToFavs, outOfFavs} from '../../actions/shopping';
@@ -25,7 +25,7 @@ import SellIcon from '@mui/icons-material/Sell';
 
 import './Product.scss';
 
-import { IelementProduct } from '../../Redux/type';
+import { IAppState, IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
 //import { color } from '@mui/system';
 
@@ -33,12 +33,21 @@ import toast from 'react-hot-toast';
 
 
 const Product = (props: any): JSX.Element => {
-    let element: IelementProduct = props.element;
+    const [selectedIcon, setSelectedIcon] = useState(false);
+    const [favorite, setFavorite] = useState(false);
+    
+    // console.log(props.id);
+    
+    // let element: IelementProduct = props.element;
     //extract element details const {favorite, id, image_url, price, productDescription, productName, stock } = element.element;
+    const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)// (stateInfo.find((id)=> id===props.id)) as IelementProduct;
+    
 
     const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch()); //, quitFromFavs, addToCart
 
     const addToFavsMethod = (name: string): void => {
+        setSelectedIcon(!selectedIcon);
         toast(`${name} added to Favorites!!`,
         {
             icon: '❤',
@@ -49,9 +58,10 @@ const Product = (props: any): JSX.Element => {
             },
         }
         );
-        addToFavs(element);
+        addToFavs(elementInfo);
     };
     const removeToFavsMethod = (name: string): void => {
+        setSelectedIcon(!selectedIcon);
         toast(`It seems that you don't like ${name} anymore`,
         {
             icon: '💔',
@@ -62,46 +72,53 @@ const Product = (props: any): JSX.Element => {
             },
         }
         );
-        quitFromFavs(element);
+        quitFromFavs(elementInfo);
     };
 
     const toggleBuy = () => {
-        // addToCart(element);
+        // addToCart(elementInfo);
     };
+
+    useEffect(() => {
+        // console.log(selectedIcon);
+        
+    },[selectedIcon])
     
     return (
         <Card sx={{ maxWidth: 500 }} className="product-container">
-            <Link to={`/products/product/${element.id}`} className="product-container_cardMedia">
+            <Link to={`/products/product/${elementInfo?.id}`} className="product-container_cardMedia">
                 <CardMedia
                 component="img"
                 height="194"
-                image= {element.image_url}
-                alt={element.productName}
+                image= {elementInfo?.image_url}
+                alt={elementInfo?.productName}
                 />
             </Link>
             <CardContent className="product-container_cardContent">
                 <Typography  paragraph>
-                    {element.productName}
+                    {elementInfo?.productName}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing className="product-container_cardAction">
                 <IconButton 
                     aria-label="add to favorites" 
-                    onClick={element.favorite===1 ? (
-                            () =>removeToFavsMethod(element.productName)
-                        ):(
-                            () => addToFavsMethod(element.productName)
-                        )
+                    onClick={
+                        () => {setFavorite(!favorite);}
+                        // elementInfo?.favorite===1 ? (
+                        //     () =>removeToFavsMethod(elementInfo?.productName)
+                        // ):(
+                        //     () => addToFavsMethod(elementInfo?.productName)
+                        // )
                     }
                     className="product-container_cardAction_favButton"
                     >
-                    <FavoriteIcon style={element.favorite===1 ? {color: 'red'} : {}} />
+                <FavoriteIcon style={elementInfo?.favorite===1 ? {color: 'red'} : {}} />
                 </IconButton>
                 <IconButton 
                     aria-label="euro"
                     className="product-container_cardAction_euroButton"
                 >
-                    <EuroIcon />:{element.price}
+                    <EuroIcon />:{elementInfo?.price}
                 </IconButton>
                 <Button
                     variant="contained"
