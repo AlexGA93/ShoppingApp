@@ -23,8 +23,6 @@ interface SelectedPagination {
 const Store = (): JSX.Element => {
     //access to the state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    //console.log(stateProducts);
-    
     
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);

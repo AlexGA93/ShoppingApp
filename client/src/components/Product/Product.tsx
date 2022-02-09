@@ -33,24 +33,33 @@ import toast from 'react-hot-toast';
 
 
 const Product = (props: any): JSX.Element => {
-    const [selectedIcon, setSelectedIcon] = useState(false);
-    const [favorite, setFavorite] = useState(false);
-    
-    // console.log(props.id);
-    
-    // let element: IelementProduct = props.element;
-    //extract element details const {favorite, id, image_url, price, productDescription, productName, stock } = element.element;
+    const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch());
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)// (stateInfo.find((id)=> id===props.id)) as IelementProduct;
+    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)
+
+    //const stateInfoF = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
+    // console.log(stateInfoF)
     
+    const [favorite, setFavorite] = useState(elementInfo.favorite);
 
-    const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch()); //, quitFromFavs, addToCart
-
-    const addToFavsMethod = (name: string): void => {
-        setSelectedIcon(!selectedIcon);
-        toast(`${name} added to Favorites!!`,
+    const toggleAction = () => {
+        if (favorite === 0) {
+            setFavorite(1);
+            addToFavs(elementInfo);
+            toggleToast(`${elementInfo.productName} added to Favorites!!`,'❤️');
+            
+            
+        }else{
+            setFavorite(0);
+            quitFromFavs(elementInfo);
+            toggleToast(`It seems that you don't like ${elementInfo.productName} anymore`,'💔');
+        }
+        
+    };
+    const toggleToast = (message: string, icon: string): void => {
+        toast(message,
         {
-            icon: '❤',
+            icon: icon,
             style: {
             borderRadius: '10px',
             background: '#333',
@@ -58,31 +67,13 @@ const Product = (props: any): JSX.Element => {
             },
         }
         );
-        addToFavs(elementInfo);
     };
-    const removeToFavsMethod = (name: string): void => {
-        setSelectedIcon(!selectedIcon);
-        toast(`It seems that you don't like ${name} anymore`,
-        {
-            icon: '💔',
-            style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            },
-        }
-        );
-        quitFromFavs(elementInfo);
-    };
-
     const toggleBuy = () => {
         // addToCart(elementInfo);
+        console.log('want to buy this'); 
     };
 
-    useEffect(() => {
-        // console.log(selectedIcon);
-        
-    },[selectedIcon])
+    useEffect(() => {},[favorite, elementInfo.favorite])
     
     return (
         <Card sx={{ maxWidth: 500 }} className="product-container">
@@ -102,17 +93,10 @@ const Product = (props: any): JSX.Element => {
             <CardActions disableSpacing className="product-container_cardAction">
                 <IconButton 
                     aria-label="add to favorites" 
-                    onClick={
-                        () => {setFavorite(!favorite);}
-                        // elementInfo?.favorite===1 ? (
-                        //     () =>removeToFavsMethod(elementInfo?.productName)
-                        // ):(
-                        //     () => addToFavsMethod(elementInfo?.productName)
-                        // )
-                    }
+                    onClick={() => toggleAction()}
                     className="product-container_cardAction_favButton"
                     >
-                <FavoriteIcon style={elementInfo?.favorite===1 ? {color: 'red'} : {}} />
+                <FavoriteIcon style={favorite === 1 ? {color: 'red'} : {}} />
                 </IconButton>
                 <IconButton 
                     aria-label="euro"
@@ -136,5 +120,4 @@ const Product = (props: any): JSX.Element => {
     )
 }
 
-// export default connect(mapStateToProps, {addToCart, addToFavs, outOfFavs})(Product);
 export default Product;

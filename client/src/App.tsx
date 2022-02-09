@@ -12,12 +12,13 @@ import { Toaster } from 'react-hot-toast';
 // styles
 import './App.scss';
 import { useDispatch } from 'react-redux';
-import { getAllProducts } from './Redux/actions/shopping';
+import { getAllFavs, getAllProducts } from './Redux/actions/shopping';
 const App = (): JSX.Element => {  
   const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllProducts());
+        dispatch(getAllFavs())
     }, [dispatch]);
   return (
       
