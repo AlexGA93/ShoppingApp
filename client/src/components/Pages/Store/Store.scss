@@ -4,7 +4,8 @@
     height: auto;
     width: 100%;
     position: absolute;
-    background-color: $backgroundColor;
+    color: $defaultDarkColorFont;
+    // background-color: $backgroundColor;
 
     
     text-align: center;
@@ -21,7 +22,7 @@
         
         padding: 25px 0 25px 0;
         align-items: center;
-        color:$defaultLightColorFont;
+        //color:$defaultLightColorFont;
 
         h1 {
           margin:0 15px 0 15px;
