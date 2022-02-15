@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from "react-router-dom";
-
-// import {addToCart, addToFavs, outOfFavs} from '../../actions/shopping';
-// import { addToFavs, quitFromFavs } from '../../Redux/actions/shopping';
 import{actionCreators} from '../../Redux/index';
 
-// import Button from '@material-ui/core/Button';
 import Button from '@mui/material/Button';
-
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -17,18 +12,15 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-//import ShareIcon from '@mui/icons-material/Share';
 import EuroIcon from '@mui/icons-material/Euro';
 import SellIcon from '@mui/icons-material/Sell';
 
-import './Product.scss';
 
 import { IAppState, IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
-//import { color } from '@mui/system';
 
+import './Product.scss';
 
 
 
@@ -36,9 +28,6 @@ const Product = (props: any): JSX.Element => {
     const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch());
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
     const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)
-
-    //const stateInfoF = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
-    // console.log(stateInfoF)
     
     const [favorite, setFavorite] = useState(elementInfo.favorite);
 

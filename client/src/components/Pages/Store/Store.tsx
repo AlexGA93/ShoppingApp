@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
+import {useState} from 'react';
+import {useSelector} from 'react-redux';
 import ReactPaginate from "react-paginate";
-
-import Axes from '../../../imgs/axes.png';
-
 import {IAppState, IelementProduct} from '../../../Redux/type'
-
-import './Store.scss';
-
 import Product from '../../Product/Product';
-import { rootStore } from '../../../Redux';
-import { dispatch } from 'react-hot-toast/dist/core/store';
-import { getAllProducts } from '../../../Redux/actions/shopping';
-
+import Axes from '../../../imgs/axes.png';
+import './Store.scss';
 
 
 interface SelectedPagination {
@@ -42,12 +34,6 @@ const Store = (): JSX.Element => {
     const changePage = ({ selected }: SelectedPagination) => {
         setPageNumber(selected);
     };
-
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(getAllProducts());
-    // }, [dispatch]);
 
     return (
        

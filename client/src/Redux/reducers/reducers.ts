@@ -1,8 +1,5 @@
-import { ListItem } from '@mui/material';
-import Product from '../../components/Product/Product';
 import * as types from '../actions/types';
-
-import {ActionTypes, IAppState , IelementProduct, stateActions} from '../type';
+import {ActionTypes, IelementProduct, stateActions} from '../type';
 
 //initial state
  const initialState = {
@@ -38,6 +35,17 @@ import {ActionTypes, IAppState , IelementProduct, stateActions} from '../type';
             }
                 
         case types.OUT_OF_FAVS:
+            // console.log(state.favs);
+            let isInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
+            let isInFavs = state.favs.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
+            // update state favs array structure
+            state.favs.splice(isInFavs.indexOf(true),1);
+            // charge changes in our state
+            return {
+                ...state,
+                products: isInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id===(payload as IelementProduct).id ? {...element, favorite: 0}: element): null,
+            }
+            // break;
         case types.GET_ALL_PRODUCTS_ERROR:
         case types.GET_ALL_FAVS_ERROR:
         case types.ADD_TO_FAVS_ERROR:

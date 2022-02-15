@@ -46,14 +46,12 @@ export const getAllFavs = () => async (dispatch: Dispatch<ActionTypes>) => {
     await api
     .get("/products/get/favorite")
     .then((response) => {
-        // console.log(response.data);
         dispatch({
             type: GET_ALL_FAVS,
             payload: response.data
         });
     })
     .catch((err) => {
-        // console.log(err);
         dispatch({
             type: GET_ALL_FAVS_ERROR,
             payload: err.message
