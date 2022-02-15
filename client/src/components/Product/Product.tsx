@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from "react-router-dom";
-
-// import {addToCart, addToFavs, outOfFavs} from '../../actions/shopping';
-// import { addToFavs, quitFromFavs } from '../../Redux/actions/shopping';
 import{actionCreators} from '../../Redux/index';
 
-// import Button from '@material-ui/core/Button';
 import Button from '@mui/material/Button';
-
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -17,31 +12,43 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-//import ShareIcon from '@mui/icons-material/Share';
 import EuroIcon from '@mui/icons-material/Euro';
 import SellIcon from '@mui/icons-material/Sell';
 
-import './Product.scss';
 
-import { IelementProduct } from '../../Redux/type';
+import { IAppState, IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
-//import { color } from '@mui/system';
 
+import './Product.scss';
 
 
 
 const Product = (props: any): JSX.Element => {
-    let element: IelementProduct = props.element;
-    //extract element details const {favorite, id, image_url, price, productDescription, productName, stock } = element.element;
+    const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch());
+    const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)
+    
+    const [favorite, setFavorite] = useState(elementInfo.favorite);
 
-    const {addToFavs} = bindActionCreators(actionCreators, useDispatch()); //, quitFromFavs, addToCart
-
-    const addToFavsMethod = (name: string): void => {
-        toast(`${name} added to Favorites!!`,
+    const toggleAction = () => {
+        if (favorite === 0) {
+            setFavorite(1);
+            addToFavs(elementInfo);
+            toggleToast(`${elementInfo.productName} added to Favorites!!`,'❤️');
+            
+            
+        }else{
+            setFavorite(0);
+            quitFromFavs(elementInfo);
+            toggleToast(`It seems that you don't like ${elementInfo.productName} anymore`,'💔');
+        }
+        
+    };
+    const toggleToast = (message: string, icon: string): void => {
+        toast(message,
         {
-            icon: '❤',
+            icon: icon,
             style: {
             borderRadius: '10px',
             background: '#333',
@@ -49,59 +56,42 @@ const Product = (props: any): JSX.Element => {
             },
         }
         );
-        addToFavs(element);
     };
-    const removeToFavsMethod = (name: string): void => {
-        toast(`It seems that you don't like ${name} anymore`,
-        {
-            icon: '💔',
-            style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-            },
-        }
-        );
-        // quitFromFavs(element);
-    };
-
     const toggleBuy = () => {
-        // addToCart(element);
+        // addToCart(elementInfo);
+        console.log('want to buy this'); 
     };
+
+    useEffect(() => {},[favorite, elementInfo.favorite])
     
     return (
         <Card sx={{ maxWidth: 500 }} className="product-container">
-            <Link to={`/products/product/${element.id}`} className="product-container_cardMedia">
+            <Link to={`/products/product/${elementInfo?.id}`} className="product-container_cardMedia">
                 <CardMedia
                 component="img"
                 height="194"
-                image= {element.image_url}
-                alt={element.productName}
+                image= {elementInfo?.image_url}
+                alt={elementInfo?.productName}
                 />
             </Link>
             <CardContent className="product-container_cardContent">
                 <Typography  paragraph>
-                    {element.productName}
+                    {elementInfo?.productName}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing className="product-container_cardAction">
                 <IconButton 
                     aria-label="add to favorites" 
-                    onClick={element.favorite===1 ? (
-                            () =>removeToFavsMethod(element.productName)
-                        ):(
-                            () => addToFavsMethod(element.productName)
-                        )
-                    }
+                    onClick={() => toggleAction()}
                     className="product-container_cardAction_favButton"
                     >
-                    <FavoriteIcon style={element.favorite===1 ? {color: 'red'} : {}} />
+                <FavoriteIcon style={favorite === 1 ? {color: 'red'} : {}} />
                 </IconButton>
                 <IconButton 
                     aria-label="euro"
                     className="product-container_cardAction_euroButton"
                 >
-                    <EuroIcon />:{element.price}
+                    <EuroIcon />:{elementInfo?.price}
                 </IconButton>
                 <Button
                     variant="contained"
@@ -119,5 +109,4 @@ const Product = (props: any): JSX.Element => {
     )
 }
 
-// export default connect(mapStateToProps, {addToCart, addToFavs, outOfFavs})(Product);
 export default Product;

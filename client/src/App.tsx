@@ -1,36 +1,29 @@
-import React, {Fragment, useEffect} from 'react';
+import {Fragment, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // components
 import NavbarComponent from './components/Navbar/NavbarComponent';
 import MainPage from './components/Pages/MainPage/MainPage';
-//import Product from './components/Product/Product';
 import Store from './components/Pages/Store/Store';
 import Favorites from './components/Pages/Favorites/Favorites';
 import ProductInfo from './components/productInfo/ProductInfo';
-
-import {useDispatch} from 'react-redux';
-
-//actions
-import {getAllProducts, getAllFavs} from './Redux/actions/shopping';
 import { Toaster } from 'react-hot-toast';
 // styles
 import './App.scss';
 
+import { useDispatch } from 'react-redux';
+import { getAllFavs, getAllProducts } from './Redux/actions/actions';
 
-const App = (): JSX.Element => {
+const App = (): JSX.Element => {  
   const dispatch = useDispatch();
-  
-  // redux store when DOM is updated
-  useEffect(()=>{
-    dispatch(getAllProducts());
-    dispatch(getAllFavs());
-  }, [dispatch])
 
-//console.log(store);
-
+    useEffect(() => {
+        dispatch(getAllProducts());
+        dispatch(getAllFavs())
+    }, [dispatch]);
   return (
-      <Fragment>
+      
+        <Fragment>
         <Router>
           <NavbarComponent />
             <Routes>
@@ -45,6 +38,7 @@ const App = (): JSX.Element => {
         position="top-right"
         reverseOrder={true}/>
       </Fragment>
+      
   );
 }
 
