@@ -5,7 +5,6 @@
     min-width: 100%;
     height: 65px;
     background-color: $backgroundColor;
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -27,31 +26,41 @@
 
     &__links {
         margin-top: 10px;
-        margin-right: 20px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-
+        justify-content: center;
 
         ul {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
+
+            padding: 0%;
             .nav-link {
                 text-decoration: none;
                 color: $defaultDarkColorFont;
+                padding: 0 0 0 25px;
+                img {
+                    height: 30px;
+                }
             }
-            .cart_counter {
-                color: $defaultLightColorFont;
-                height: 25px;
-                width: 25px;
-                background-color: $defaultAlertColor;
-                border-radius: 50%;
-                display: inline-block;
-                &__data {
-                    padding-bottom: 15px;
-                    font-size: 20px;
-                    align-items: center;
+            .favs, .cart {
+                margin-top: 20px;
+                margin-right: 5px;
+                &_counter {
+                    
+                    height: 28px;
+                    width: 28px;
+                    background-color: $defaultAlertColor;
+                    border-radius: 50%;
+                    display: block;
+                    &__data {
+                        color: $defaultLightColorFont;
+                        margin-left: 7px;
+                        font-size: 20px;
+                    }
                 }
             }
         }
