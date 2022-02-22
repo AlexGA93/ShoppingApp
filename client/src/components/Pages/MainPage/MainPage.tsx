@@ -1,35 +1,22 @@
-
-import {Link} from 'react-router-dom';
-import Button from '@mui/material/Button';
-import HelmetIcon from '../../../media/img/helmet.png';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import Axes from '../../../media/img/axes.png';
+import { IAppState } from '../../../Redux/type';
+import Store from '../Store/Store';
 
 import './MainPage.scss';
 
 const MainPage = (): JSX.Element => {
-    
-    return (
-        <>
-            <div className="main-page">
-                <div className="main-page__title">
-                    <h2>Welcome to Vikingz!</h2>
-                </div>
-                <div className="main-page__logo">
-                    <img src={HelmetIcon} style={{width:'300px'}}/>
-                </div>
-                <div className="main-page__subtitle">
-                    <p>Click to access to the store!</p>
-                </div>
-                <div className="main-page__button">
-                    {/* <Button variant="contained" color="success">Go to Store!</Button> */}
-                    <Link to="/store">
-                        <Button variant="contained" color="success">Go to Store!</Button>
-                    </Link>
-                </div>
-                
-            </div>
-            
-        </>
-    )
+  return (
+    <div className="products">
+        <div className="products__title">
+            <img alt="axes" src={Axes} style={{width:'60px'}}/>
+            <h3>Product List</h3>
+            <img alt="axes" src={Axes} style={{width:'60px'}}/>
+        </div>
+        <Store />
+    </div>
+  )
 }
 
 export default MainPage

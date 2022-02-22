@@ -3,8 +3,9 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // components
 import NavbarComponent from './components/Navbar/NavbarComponent';
+import Presentation from './components/Pages/Presentation/Presentation';
 import MainPage from './components/Pages/MainPage/MainPage';
-import Store from './components/Pages/Store/Store';
+// import Store from './components/Pages/Store/Store';
 import Favorites from './components/Pages/Favorites/Favorites';
 import ProductInfo from './components/productInfo/ProductInfo';
 import { Toaster } from 'react-hot-toast';
@@ -28,8 +29,8 @@ const App = (): JSX.Element => {
           <NavbarComponent />
             <Routes>
               {/* React router v6 version */}
-            <Route path="/" element={<MainPage />} />
-            <Route path="/store" element={<Store />} />
+            <Route path="/" element={<Presentation />} />
+            <Route path="/store" element={<MainPage />} />
             <Route path="/favorites" element={<Favorites />}/>
             <Route path="/products/product/:id" element={<ProductInfo />} />
           </Routes> 
