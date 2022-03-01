@@ -9,7 +9,7 @@ import './MainPage.scss';
 const MainPage = (): JSX.Element => {
   return (
     <div className="products">
-        <div className="products__title">
+        <div className="products_title">
             <img alt="axes" src={Axes} style={{width:'60px'}}/>
             <h3>Product List</h3>
             <img alt="axes" src={Axes} style={{width:'60px'}}/>

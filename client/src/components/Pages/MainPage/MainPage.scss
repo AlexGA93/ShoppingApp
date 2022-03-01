@@ -1,3 +1,4 @@
+@use '../../../scss/modules';
 @import '../../../scss/index.scss';
 
 .products {
@@ -14,21 +15,7 @@
       color:$defaultDarkColorFont;
       text-decoration: none;
     }
-
-    &__title {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        
-        padding: 25px 0 25px 0;
-        align-items: center;
-        //color:$defaultLightColorFont;
-
-        h3 {
-          margin:0 20px 0 20px;
-        }
-        
-    }
+    
     hr {
       border: 0;
       width: 100%;

@@ -24,7 +24,9 @@ const NavbarComponent = (): JSX.Element => {
         <div className='container__name'>
           {/* logo and Name */}
           <img src={HelmetIcon} alt='helmet icon'/>
-          <h2>Vikingz</h2>
+          <Link className='nav-link' to="/">
+            <h2>Vikingz</h2>
+          </Link>
         </div>
         {/* search section */}
         {/* links section */}
