@@ -15,17 +15,8 @@ interface SelectedPagination {
 const Store = (): JSX.Element => {
     //access to the state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    // console.log(stateProducts);
-    // var arr = Object.keys(obj).map(function (key) { return obj[key]; });
-    const arrayState = Object.keys(stateProducts).map((element: any) => stateProducts[element])
-    console.log(typeof(arrayState));
-    
 
     const [search, setSearch] = useState("");
-
-
-
-    
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
@@ -37,23 +28,16 @@ const Store = (): JSX.Element => {
     
     // filtered products
     const filteredProducts = search.length === 0 ? (
-        arrayState
+        stateProducts
         ) : (
-            arrayState.filter( product => {
-                product.productName.toLowerCase().includes(search.toLowerCase())
-            })
+            stateProducts.filter( product => product.productName.toLowerCase().includes(search.toLowerCase()))
         )
-    // console.log(filteredProducts); //turn state into array
-    
 
     const displayProducts = filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
         <Product className="products__list_element" key={element.id} id={element.id} />
     ));
 
-    // const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
-    //     <Product className="products__list_element" key={element.id} id={element.id} />
-    // ));
-
+    // pagination
     const pageCount = Math.ceil((stateProducts? stateProducts.length: 0 )/ productsPerPage);
 
     const changePage = ({ selected }: SelectedPagination) => {
