@@ -1,21 +1,19 @@
 @import '../../scss/index.scss';
 .product-container {
 
-    margin: 10px 10px 20px 10px;
+    // margin: 10px 10px 20px 10px;
     width: 300px;
-    height: 330px;
+    height: 380px;
+    box-shadow: none !important;
 
     
     &_cardContent {
-        .name{
-            font-size: 17px;
-            margin: 0;
-        }
+        height: 50px;
     }
 
     &_cardAction {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 }

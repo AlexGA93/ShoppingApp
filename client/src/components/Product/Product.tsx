@@ -69,30 +69,34 @@ const Product = (props: any): JSX.Element => {
             <Link to={`/products/product/${elementInfo?.id}`} className="product-container_cardMedia">
                 <CardMedia
                 component="img"
-                height="194"
+                height="250"
                 image= {elementInfo?.image_url}
                 alt={elementInfo?.productName}
                 />
             </Link>
+
             <CardContent className="product-container_cardContent">
                 <Typography  paragraph>
                     {elementInfo?.productName}
                 </Typography>
             </CardContent>
+
             <CardActions disableSpacing className="product-container_cardAction">
-                <IconButton 
-                    aria-label="add to favorites" 
-                    onClick={() => toggleAction()}
-                    className="product-container_cardAction_favButton"
-                    >
-                <FavoriteIcon style={favorite === 1 ? {color: 'red'} : {}} />
-                </IconButton>
                 <IconButton 
                     aria-label="euro"
                     className="product-container_cardAction_euroButton"
                 >
                     <EuroIcon />:{elementInfo?.price}
                 </IconButton>
+
+                <IconButton 
+                    aria-label="add to favorites" 
+                    onClick={() => toggleAction()}
+                    className="product-container_cardAction_favButton"
+                    >
+                    <FavoriteIcon style={favorite === 1 ? {color: 'red'} : {}} />
+                </IconButton>
+                
                 <Button
                     variant="contained"
                     color="primary"

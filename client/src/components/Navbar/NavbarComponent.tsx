@@ -15,7 +15,7 @@ import { IAppState } from '../../Redux/type';
 const NavbarComponent = (): JSX.Element => {
   // If there is favs in array state render length array
   const favsCounter = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
-  console.log(favsCounter);
+  // console.log(favsCounter);
   // If there is cart in array state render length array
   const cartCounter = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
 

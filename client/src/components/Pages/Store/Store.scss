@@ -24,8 +24,8 @@
         align-items: center;
         //color:$defaultLightColorFont;
 
-        h1 {
-          margin:0 15px 0 15px;
+        h3 {
+          margin:0 20px 0 20px;
         }
         
     }
@@ -37,13 +37,13 @@
   }
 
     &__list {
-        margin: 0 auto;
+        margin: 100px;// 0 auto;
 
         //width: 1100px;
         padding-left: 10px;
         
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto auto auto auto;
         column-gap: 20px;
         row-gap: 20px;
         justify-content: center;
@@ -70,14 +70,14 @@
             padding: 10px;
             margin: 8px;
             border-radius: 5px;
-            border: 1px solid $defaultLightColorFont;
-            color: $defaultLightColorFont;
+            border: 1px solid $backgroundColor;
+            color: $backgroundColor;
             cursor: pointer;
           }
           
           .paginationBttns a:hover {
-            color:$backgroundColor;
-            background-color:  $defaultLightColorFont;
+            color:$defaultLightColorFont;
+            background-color: $backgroundColor ;
           }
           
           .paginationActive a {
@@ -86,8 +86,8 @@
           }
           
           .paginationDisabled a {
-            color: $defaultLightColorFont;
-            background-color: $backgroundColor;
+            color: $backgroundColor;
+            background-color: $defaultLightColorFont;
           }
     }
 }

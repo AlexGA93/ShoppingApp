@@ -15,20 +15,29 @@ interface SelectedPagination {
 const Store = (): JSX.Element => {
     //access to the state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    
+
+    const [search, setSearch] = useState("");
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 6;
+    const productsPerPage = 10;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
     
     
-    const displayProducts = stateProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
+    // filtered products
+    const filteredProducts = search.length === 0 ? (
+        stateProducts
+        ) : (
+            stateProducts.filter( product => product.productName.toLowerCase().includes(search.toLowerCase()))
+        )
+
+    const displayProducts = filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
         <Product className="products__list_element" key={element.id} id={element.id} />
     ));
 
+    // pagination
     const pageCount = Math.ceil((stateProducts? stateProducts.length: 0 )/ productsPerPage);
 
     const changePage = ({ selected }: SelectedPagination) => {
@@ -38,13 +47,15 @@ const Store = (): JSX.Element => {
     return (
        
         <div className="products">
-            <div className="products__title">
-                <img alt="axes" src={Axes} style={{width:'70px'}}/>
-                <h1>Product List</h1>
-                <img alt="axes" src={Axes} style={{width:'70px'}}/>
-            </div>
-            <hr />
-            <div className="products__list">
+            {/* search bar */}
+            <input 
+                type="text"
+                placeholder="Product Name"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} 
+            />
+            {/* <hr /> */}
+             <div className="products__list">
                 {displayProducts}
             </div>
             <div className="products__pagination">
@@ -63,7 +74,8 @@ const Store = (): JSX.Element => {
                     activeClassName={"paginationActive"}
                 />
             </div>
-            <div>© 2021 Vikingz Shop · Built by <a href="https://github.com/AlexGA93">Alejandro Gimeno Ataz</a></div>
+
+        <div>© 2021 Vikingz Shop · Built by <a href="https://github.com/AlexGA93">Alejandro Gimeno Ataz</a></div>
         </div>
     )
 }
