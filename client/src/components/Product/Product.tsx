@@ -16,7 +16,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import EuroIcon from '@mui/icons-material/Euro';
 import SellIcon from '@mui/icons-material/Sell';
 
-
 import { IAppState, IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
 
@@ -25,7 +24,7 @@ import './Product.scss';
 
 
 const Product = (props: any): JSX.Element => {
-    const {addToFavs, quitFromFavs} = bindActionCreators(actionCreators, useDispatch());
+    const {addToFavs, quitFromFavs, addToCart} = bindActionCreators(actionCreators, useDispatch());
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
     const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)
     
@@ -58,8 +57,8 @@ const Product = (props: any): JSX.Element => {
         );
     };
     const toggleBuy = () => {
-        // addToCart(elementInfo);
-        console.log('want to buy this'); 
+        addToCart(elementInfo);
+        // console.log(elementInfo); 
     };
 
     useEffect(() => {},[favorite, elementInfo.favorite])

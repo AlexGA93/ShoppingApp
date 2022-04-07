@@ -24,31 +24,37 @@ import {ActionTypes, IelementProduct, stateActions} from '../type';
                 favs: payload
             }    
         case types.ADD_TO_FAVS:
-            // searcg if payload is in products if yes update favs array
-            let inProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
-            console.log(inProducts.includes(true));
+            let isInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
 
             return {
                 ...state,
-                products: inProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id===(payload as IelementProduct).id ? {...element, favorite: 1}: element): null,
+                products: isInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id===(payload as IelementProduct).id ? {...element, favorite: 1}: element): null,
                 favs: payload
             }
-                
+
         case types.OUT_OF_FAVS:
-            // console.log(state.favs);
-            let isInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
+            let dataIsInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
             let isInFavs = state.favs.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
-            // update state favs array structure
             state.favs.splice(isInFavs.indexOf(true),1);
-            // charge changes in our state
+
             return {
                 ...state,
-                products: isInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id===(payload as IelementProduct).id ? {...element, favorite: 0}: element): null,
+                products: dataIsInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id===(payload as IelementProduct).id ? {...element, favorite: 0}: element): null,
             }
-            // break;
+
+        case types.ADD_TO_CART:
+
+            let inProducts = state.products.find( (product: IelementProduct) => product.id === (payload as IelementProduct).id );
+            let inCart = state.cart.find( (product: IelementProduct) => product.id === (payload as IelementProduct).id );
+            
+            return {
+                ...state,
+                cart: inCart ? state.cart.map((item: IelementProduct) =>item.id === (payload as IelementProduct).id ? { ...item, qty: item.qty ?  item.qty+1 : null }: item): [...state.cart, { ...state.products, qty: 1 }],
+            };
         case types.GET_ALL_PRODUCTS_ERROR:
         case types.GET_ALL_FAVS_ERROR:
         case types.ADD_TO_FAVS_ERROR:
+        case types.ADD_TO_CART_ERROR: 
         default:
             return state;
     }

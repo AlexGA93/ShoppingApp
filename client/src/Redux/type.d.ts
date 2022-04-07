@@ -10,7 +10,8 @@ export declare interface IelementProduct {
     price: number,
     productDescription: string,
     productName: string,
-    stock: number
+    stock: number,
+    qty?: number
 };
 
 // state element type

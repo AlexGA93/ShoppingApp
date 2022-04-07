@@ -14,7 +14,7 @@ const MainPage = (): JSX.Element => {
                     <h2>Welcome to Vikingz!</h2>
                 </div>
                 <div className="main-page__logo">
-                    <img src={HelmetIcon} style={{width:'300px'}}/>
+                    <img src={HelmetIcon} alt="helmet icon" style={{width:'300px'}}/>
                 </div>
                 <div className="main-page__subtitle">
                     <p>Click to access to the store!</p>

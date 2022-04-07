@@ -14,6 +14,7 @@ import './App.scss';
 
 import { useDispatch } from 'react-redux';
 import { getAllFavs, getAllProducts } from './Redux/actions/actions';
+import Cart from './components/Pages/Cart/Cart';
 
 const App = (): JSX.Element => {  
   const dispatch = useDispatch();
@@ -32,11 +33,13 @@ const App = (): JSX.Element => {
             <Route path="/" element={<Presentation />} />
             <Route path="/store" element={<MainPage />} />
             <Route path="/favorites" element={<Favorites />}/>
+            <Route path="/cart" element={<Cart />} />
             <Route path="/products/product/:id" element={<ProductInfo />} />
+            
           </Routes> 
         </Router>
         <Toaster   
-        position="top-right"
+        position="bottom-right"
         reverseOrder={true}/>
       </Fragment>
       
