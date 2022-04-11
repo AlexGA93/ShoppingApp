@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from "react-router-dom";
-import{actionCreators} from '../../Redux/index';
+import{actionCreators} from '../../Redux';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';

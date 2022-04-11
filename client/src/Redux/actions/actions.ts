@@ -8,16 +8,26 @@ import {
     ADD_TO_FAVS,
     ADD_TO_FAVS_ERROR,
 
-
     OUT_OF_FAVS,
     OUT_OF_FAVS_ERROR,
 
-
     ADD_TO_CART,
-    ADD_TO_CART_ERROR
+    ADD_TO_CART_ERROR,
 
+    REMOVE_FROM_CART,
+    REMOVE_FROM_CART_ERROR,
+
+    ADD_ONE_MORE,
+    ADD_ONE_MORE_ERROR,
+
+    REMOVE_ONE_LESS,
+    REMOVE_ONE_LESS_ERROR,
+
+    PAYDAY,
+    PAYDAY_ERROR
     
 } from './types';
+
 import api from '../../api/products';
 import {Dispatch} from 'redux';
 import {ActionTypes, IelementProduct} from '../type';
@@ -109,3 +119,33 @@ export const addToCart = (productData: IelementProduct) => async(dispatch: Dispa
     }
 };
     
+export const addOneMore = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
+    
+    try {
+        dispatch({
+            type: ADD_ONE_MORE,
+            payload: productData
+        });
+    } catch (err) {
+        dispatch({
+            type: ADD_ONE_MORE_ERROR,
+            payload: 'add one more error'
+        });
+    }
+    
+};
+
+export const removeOneLess = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
+    
+    try {
+        dispatch({
+            type: REMOVE_ONE_LESS,
+            payload: productData
+        });
+    } catch (err) {
+        dispatch({
+            type: REMOVE_ONE_LESS_ERROR,
+            payload: 'remove one less error'
+        });
+    }
+};
