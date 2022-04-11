@@ -40,7 +40,7 @@ export const getAllProducts = () => async (dispatch: Dispatch<ActionTypes>) => {
         });
     })
     
-}
+};
 // FAVORITES
 export const getAllFavs = () => async (dispatch: Dispatch<ActionTypes>) => {
     await api
@@ -58,7 +58,7 @@ export const getAllFavs = () => async (dispatch: Dispatch<ActionTypes>) => {
         });
     })
     
-}
+};
 export const addToFavs = (productData: IelementProduct) => async (dispatch: Dispatch<ActionTypes>) => {
     await api
     .patch(`/products/${productData.id}`, {favorite: 1})
@@ -75,7 +75,6 @@ export const addToFavs = (productData: IelementProduct) => async (dispatch: Disp
         });
     })
 };
-
 export const quitFromFavs = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
     await api
     .patch(`/products/${productData.id}`, {favorite:0})
@@ -91,5 +90,22 @@ export const quitFromFavs = (productData: IelementProduct) => async(dispatch: Di
             payload: "Out of Favs Error"
         });
     })
-}
+};
+// CART
+export const addToCart = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
+    // console.log(productData);
+    
+    // Add to local cart state
+    try {
+        dispatch({
+            type: ADD_TO_CART,
+            payload: productData
+        });
+    } catch (err) {
+        dispatch({
+            type: ADD_TO_CART_ERROR,
+            payload: "Add to Cart Error"
+        });
+    }
+};
     

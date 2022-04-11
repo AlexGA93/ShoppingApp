@@ -1,0 +1,34 @@
+@use '../../scss/modules';
+@import '../../scss/index.scss';
+
+.cartPayment-container {
+    width: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    &_title {
+        display: flex;
+        justify-content: center;
+    }
+    &_content {
+        li {
+            margin: 30px 0 30px 0;
+        }
+        img {
+            width: 50px;
+        }
+    }
+    &_buttons {
+        display: flex;
+        justify-content: center;
+        
+        &_element {
+            width: 250px;
+            background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+            height: 40px;
+            border-radius: 15px;
+        }
+    }
+}

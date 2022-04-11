@@ -1,6 +1,6 @@
 @import './index.scss';
 // Titles style
-.products, .product-info {
+.products, .product-info, .favorites, .cart-container, .cartBanner-container {
   &_title {
     display: flex;
     flex-direction: row;
@@ -17,4 +17,13 @@
     }
     
   }
+  &_buttons {
+    button {
+        background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+        height: 25px;
+        width: 100px;
+        border:0px;
+        color: $defaultLightColorFont;
+    }
+}
 }

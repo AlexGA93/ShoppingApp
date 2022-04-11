@@ -32,12 +32,12 @@ const NavbarComponent = (): JSX.Element => {
         {/* links section */}
         <nav className='container__links'>
           <ul>
-              <Link className='nav-link' to="/cart">
+              <Link className='nav-link' to="/store">
               <img src={Store} alt='cart icon'/>
               </Link>
           </ul>
           <ul>
-            <Link className='nav-link' to="/cart">
+            <Link className='nav-link' to="/favorites">
               <img src={Heart} alt='cart icon'/>
               </Link>
             <div className='favs'>

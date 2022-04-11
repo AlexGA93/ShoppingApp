@@ -1,0 +1,16 @@
+@use '../../../scss/modules';
+@import '../../../scss/index.scss';
+
+.cart-container {
+    &_content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        &_list {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+// justify-content: center;
