@@ -1,0 +1,19 @@
+@use '../../scss/modules';
+@import '../../scss/index.scss';
+
+.cartBanner-container {
+    width: 500px;
+    margin-bottom: 20px; 
+    align-self: center;
+    // &_bannerMedia {}
+    &_cardContent {
+        &_name {
+            width: auto;
+        }
+        &_price {
+            font-size: $bigFontSize;
+            font-weight: bold;
+        }
+    }
+    
+}

@@ -1,5 +1,8 @@
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
 import { IAppState, IelementProduct } from '../../../Redux/type';
+
+import Axes from '../../../media/img/axes.png';
+
 import Product from '../../Product/Product';
 
 import './Favorites.scss';
@@ -10,11 +13,12 @@ const Favorites = (): JSX.Element => {
     
     return (
         <div className='favorites'>
-            
-             <div className="favorites__title">
-                <h1>Favorites</h1>
-                <hr />
+            <div className="favorites_title">
+                <img alt="axes" src={Axes} style={{width:'60px'}}/>
+                <h3>Favorites</h3>
+                <img alt="axes" src={Axes} style={{width:'60px'}}/>
             </div>
+            
             
             <div className="favorites__list">
             {

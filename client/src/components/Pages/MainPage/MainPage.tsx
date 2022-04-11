@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
 import Axes from '../../../media/img/axes.png';
-import { IAppState } from '../../../Redux/type';
 import Store from '../Store/Store';
 
 import './MainPage.scss';

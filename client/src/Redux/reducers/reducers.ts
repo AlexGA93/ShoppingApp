@@ -44,12 +44,15 @@ import {ActionTypes, IelementProduct, stateActions} from '../type';
 
         case types.ADD_TO_CART:
 
-            let inProducts = state.products.find( (product: IelementProduct) => product.id === (payload as IelementProduct).id );
+            let inProducts = state.products.find( (product: IelementProduct) => product.id === (payload as IelementProduct).id ) ?? {};
             let inCart = state.cart.find( (product: IelementProduct) => product.id === (payload as IelementProduct).id );
             
             return {
                 ...state,
-                cart: inCart ? state.cart.map((item: IelementProduct) =>item.id === (payload as IelementProduct).id ? { ...item, qty: item.qty ?  item.qty+1 : null }: item): [...state.cart, { ...state.products, qty: 1 }],
+                cart: inCart ? 
+                    state.cart.map((item: IelementProduct) =>item.id === (payload as IelementProduct).id ? { ...item, qty: item.qty ?  item.qty+1 : null }: item) 
+                    : 
+                    [...state.cart, { ...inProducts, qty: 1 }],
             };
         case types.GET_ALL_PRODUCTS_ERROR:
         case types.GET_ALL_FAVS_ERROR:
