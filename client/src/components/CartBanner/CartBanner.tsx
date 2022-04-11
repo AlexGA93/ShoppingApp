@@ -1,37 +1,24 @@
-import React, {useState} from 'react';
+// import React, {createContext, useContext} from 'react';
+import './CartBanner.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState, IelementProduct } from '../../Redux/type';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../Redux';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/styles';
 
-import './CartBanner.scss';
 
 const CartBanner = (props: any):JSX.Element => {
-
-    let [counter, setCounter] = useState<number>(1);
-
-    // console.log(props.element);
-
-    // const toggleQtyAdd = () => {
-    //     setCounter(counter++);
-    // };
-    // const toggleQtyRemove = () => {
-    //     setCounter(counter--);
-    // };
-
-    const {
-        id, 
-        image_url, 
-        stock, 
-        productName,
-        price,
-        productDescription,
-        favorite,
-        qty
-    } = props.element;
+    const {addOneMore, removeOneLess} = bindActionCreators(actionCreators, useDispatch());
+    
+    const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
+    const productInfo = ((stateCart.find(element => element.id === props.id)) as IelementProduct);
+    // console.log(productInfo);
+    
+    const toggleProductQty = (label: string) => label==='+' ? addOneMore(productInfo) : removeOneLess(productInfo);
 
     return (
         <Card sx={{ height: 350, maxWidth: 700 }} className="cartBanner-container">
@@ -39,8 +26,8 @@ const CartBanner = (props: any):JSX.Element => {
                <CardMedia
                component="img"
                height="200"
-               image= {image_url}
-               alt={productName}
+               image= {productInfo.image_url}
+               alt={productInfo.productName}
                />
             </div>
             
@@ -60,7 +47,7 @@ const CartBanner = (props: any):JSX.Element => {
                     variant="h6" 
                     paragraph
                 >
-                    {productName}
+                    {productInfo.productName}
                 </Typography>
                 <Typography 
                     sx={{ fontSize: 30, fontWeight: 'bold', width: '25%' }}
@@ -68,10 +55,10 @@ const CartBanner = (props: any):JSX.Element => {
                     variant="body2" 
                     gutterBottom
                 >
-                    {price}$
+                    {productInfo.price}$
                 </Typography>
             </CardContent>
-
+            
             <CardContent
             className="cartBanner-container_buttons" 
             sx={{
@@ -81,9 +68,9 @@ const CartBanner = (props: any):JSX.Element => {
                 justifyContent: 'space-evenly'
             }}>
                 
-                <button onClick={() => setCounter(counter++)}>+1</button>
-                { counter }
-                <button onClick={() => setCounter(counter--)}>-1</button>
+                <button onClick={() => toggleProductQty('+')}>+1</button>
+                { productInfo.qty }
+                <button onClick={() => toggleProductQty('-')}>-1</button>
                 
             </CardContent>
             
