@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "json-server --port 5000 --routes routes.json --watch db.json"
+    "server": "json-server --port 5000 --routes routes.json --watch db.json",
+    "dev": "concurrently \"npm run server\" \"cd ../client && npm start\""
   },
   "author": "",
   "license": "ISC",

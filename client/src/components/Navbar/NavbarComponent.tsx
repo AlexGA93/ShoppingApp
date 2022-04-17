@@ -1,6 +1,6 @@
 
 import HelmetIcon from '../../media/img/helmet.png';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './NavbarComponent.scss';
 import { useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ import Cart from '../../media/icon/cart.png';
 import Heart from '../../media/icon/favorite.png';
 import Store from '../../media/icon/online-store.png';
 import { IAppState } from '../../Redux/type';
+import { useEffect } from 'react';
 
 
 
@@ -19,28 +20,34 @@ const NavbarComponent = (): JSX.Element => {
   // If there is cart in array state render length array
   const cartCounter = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
 
-    return (
-      <div className='container'>
-        <div className='container__name'>
-          {/* logo and Name */}
-          <img src={HelmetIcon} alt='helmet icon'/>
-          <Link className='nav-link' to="/">
-            <h2>Vikingz</h2>
+  // Use hook to deal with life cycle
+  useEffect(() => {
+    console.log(cartCounter);
+
+  }, [cartCounter]);
+
+  return (
+    <div className='container'>
+      <div className='container__name'>
+        {/* logo and Name */}
+        <img src={HelmetIcon} alt='helmet icon' />
+        <Link className='nav-link' to="/">
+          <h2>Vikingz</h2>
+        </Link>
+      </div>
+      {/* search section */}
+      {/* links section */}
+      <nav className='container__links'>
+        <ul>
+          <Link className='nav-link' to="/store">
+            <img src={Store} alt='cart icon' />
           </Link>
-        </div>
-        {/* search section */}
-        {/* links section */}
-        <nav className='container__links'>
-          <ul>
-              <Link className='nav-link' to="/store">
-              <img src={Store} alt='cart icon'/>
-              </Link>
-          </ul>
-          <ul>
-            <Link className='nav-link' to="/favorites">
-              <img src={Heart} alt='cart icon'/>
-              </Link>
-            <div className='favs'>
+        </ul>
+        <ul>
+          <Link className='nav-link' to="/favorites">
+            <img src={Heart} alt='cart icon' />
+          </Link>
+          <div className='favs'>
             {
               favsCounter.length > 0 ? (
                 <span className="favs_counter">
@@ -48,13 +55,13 @@ const NavbarComponent = (): JSX.Element => {
                 </span>
               ) : null
             }
-            </div>
-          </ul>
-          <ul>
-            <Link className='nav-link' to="/cart">
-              <img src={Cart} alt='cart icon'/>
-            </Link>
-            <div className='cart'>
+          </div>
+        </ul>
+        <ul>
+          <Link className='nav-link' to="/cart">
+            <img src={Cart} alt='cart icon' />
+          </Link>
+          <div className='cart'>
             {
               cartCounter.length > 0 ? (
                 <span className="cart_counter">
@@ -62,11 +69,11 @@ const NavbarComponent = (): JSX.Element => {
                 </span>
               ) : null
             }
-            </div>
-          </ul>
-        </nav>
-      </div>
-    )
+          </div>
+        </ul>
+      </nav>
+    </div>
+  )
 }
 
 export default NavbarComponent
