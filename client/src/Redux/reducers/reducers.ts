@@ -1,3 +1,4 @@
+import Cart from '../../components/Pages/Cart/Cart';
 import * as types from '../actions/types';
 import { ActionTypes, IelementProduct, stateActions } from '../type';
 
@@ -52,6 +53,7 @@ const shopping = (state = initialState, action: ActionTypes) => {
                     :
                     [...state.cart, { ...inProducts, qty: 1 }],
             };
+
         case types.ADD_ONE_MORE:
 
             let productQtyMore = (payload as IelementProduct).qty ?? 0;
@@ -63,22 +65,21 @@ const shopping = (state = initialState, action: ActionTypes) => {
                 )
             }
         case types.REMOVE_ONE_LESS:
+
             let productQtyLess = (payload as IelementProduct).qty ?? 1;
-            // obtain array's element index by payload
-            // arr.splice( arr.map(element => element.qty === payload.qty).indexOf(true),1); 
+            // let emptyModel = { favorite: 0, id: "", image_url: "", price: 0, productDescription: "", productName: "", stock: 0, qty: 1 }
+            // console.log(productQtyLess);
 
             return {
                 ...state,
-                cart: (productQtyLess - 1 > 0) ? (
-                    state.cart.map(
-                        (item: IelementProduct) => (item.id === (payload as IelementProduct).id) ? { ...item, qty: productQtyLess -= 1 } : item
-                    )
+                cart: (productQtyLess < 2) ? (
+                    state.cart.filter((element: IelementProduct) => element.id !== (payload as IelementProduct).id)
                 ) : (
-                    state.cart.splice(
-                        state.cart.map((element: IelementProduct) => element.qty === (payload as IelementProduct).qty).indexOf(true), 1)
+                    state.cart.map((item: IelementProduct) => (item.id === (payload as IelementProduct).id) ? {
+                        ...item,
+                        qty: (productQtyLess > 0) ? productQtyLess -= 1 : 1
+                    } : item)
                 )
-
-
             }
 
         // ERRORS
