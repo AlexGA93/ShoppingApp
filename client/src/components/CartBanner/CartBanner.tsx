@@ -8,11 +8,11 @@ import {Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 import './CartBanner.scss';
 
-const CartBanner = (props: any):JSX.Element => {
+const CartBanner: React.FC<{ key: string, id: string}>  = (key): JSX.Element => {
     const {addOneMore, removeOneLess} = bindActionCreators(actionCreators, useDispatch());
     
     const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
-    const productInfo = ((stateCart.find(element => element.id === props.id)) as IelementProduct);
+    const productInfo = ((stateCart.find(element => element.id === key.id)) as IelementProduct);
     
     const toggleProductQty = (label: string) => label==='+' ? addOneMore(productInfo) : removeOneLess(productInfo);
 

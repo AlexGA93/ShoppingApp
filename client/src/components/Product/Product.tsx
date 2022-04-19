@@ -16,10 +16,11 @@ import './Product.scss';
 
 
 
-const Product = (props: any): JSX.Element => {
+const Product: React.FC<{ className:string, key: string, id: string}> = (key): JSX.Element => {
     const {addToFavs, quitFromFavs, addToCart} = bindActionCreators(actionCreators, useDispatch());
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct);
+    
+    const elementInfo = (stateInfo.find(element => element.id === key.id) as IelementProduct);
     
     const [favorite, setFavorite] = useState(elementInfo.favorite);
 
