@@ -15,9 +15,16 @@ const shopping = (state = initialState, action: ActionTypes) => {
 
     switch (type) {
         case types.GET_ALL_PRODUCTS:
+            var productInProducts = state.products.map( (element: IelementProduct): boolean => element.id === (payload as IelementProduct).id );
             return {
                 ...state,
-                products: payload
+                products: (payload as IelementProduct[]).map((element: IelementProduct) => {
+                    return {
+                        ...element,
+                        favorite: 0,
+                        qty: 1
+                    }
+                })
             };
         case types.GET_ALL_FAVS:
             return {

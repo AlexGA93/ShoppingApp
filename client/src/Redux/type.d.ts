@@ -4,14 +4,26 @@ export declare type typeActions = string;
 
 // product array element type
 export declare interface IelementProduct {
-    favorite: number,
     id: string,
-    image_url: string,
+    title: string,
     price: number,
-    productDescription: string,
-    productName: string,
-    stock: number,
-    qty?: number
+    description: string,
+    category: string,
+    image:string,
+    qty?: number,
+    favorite?: number,
+    rating: {
+        rate: number,
+        count: number // stock
+    }
+    // favorite: number,
+    // id: string,
+    // image: string,
+    // price: number,
+    // description: string,
+    // title: string,
+    // stock: number,
+    // qty?: number
 };
 
 // state element type

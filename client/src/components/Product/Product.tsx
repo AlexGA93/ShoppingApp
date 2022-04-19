@@ -21,6 +21,8 @@ const Product: React.FC<{ className:string, key: string, id: string}> = (key): J
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
     
     const elementInfo = (stateInfo.find(element => element.id === key.id) as IelementProduct);
+    console.log(elementInfo);
+    
     
     const [favorite, setFavorite] = useState(elementInfo.favorite);
 
@@ -28,13 +30,13 @@ const Product: React.FC<{ className:string, key: string, id: string}> = (key): J
         if (favorite === 0) {
             setFavorite(1);
             addToFavs(elementInfo);
-            toggleToast(`${elementInfo.productName} added to Favorites!!`,'❤️');
+            toggleToast(`${elementInfo.title} added to Favorites!!`,'❤️');
             
             
         }else{
             setFavorite(0);
             quitFromFavs(elementInfo);
-            toggleToast(`It seems that you don't like ${elementInfo.productName} anymore`,'💔');
+            toggleToast(`It seems that you don't like ${elementInfo.title} anymore`,'💔');
         }
         
     };
@@ -57,19 +59,19 @@ const Product: React.FC<{ className:string, key: string, id: string}> = (key): J
     useEffect(() => {},[favorite, elementInfo.favorite])
     
     return (
-        <Card sx={{ maxWidth: 500 }} className="product-container">
+        <Card className="product-container">
             <Link to={`/products/product/${elementInfo?.id}`} className="product-container_cardMedia">
                 <CardMedia
                 component="img"
-                height="250"
-                image= {elementInfo?.image_url}
-                alt={elementInfo?.productName}
+                height="400"
+                image= {elementInfo?.image}
+                alt={elementInfo?.title}
                 />
             </Link>
 
             <CardContent className="product-container_cardContent">
                 <Typography  paragraph>
-                    {elementInfo?.productName}
+                    {elementInfo?.title}
                 </Typography>
             </CardContent>
 

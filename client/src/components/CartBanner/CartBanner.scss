@@ -2,11 +2,16 @@
 @import '../../scss/index.scss';
 
 .cartBanner-container {
-    width: 500px;
+    width: 600px;
+    max-width: 700px;
+    height: 400px;
     margin-bottom: 20px; 
-    align-self: center;
-    // &_bannerMedia {}
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     &_cardContent {
+        display: flex;
+        flex-direction: column;
         &_name {
             width: auto;
         }

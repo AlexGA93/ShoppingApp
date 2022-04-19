@@ -7,6 +7,7 @@ import { actionCreators } from '../../Redux';
 import {Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 import './CartBanner.scss';
+import { Link } from 'react-router-dom';
 
 const CartBanner: React.FC<{ key: string, id: string}>  = (key): JSX.Element => {
     const {addOneMore, removeOneLess} = bindActionCreators(actionCreators, useDispatch());
@@ -17,14 +18,16 @@ const CartBanner: React.FC<{ key: string, id: string}>  = (key): JSX.Element => 
     const toggleProductQty = (label: string) => label==='+' ? addOneMore(productInfo) : removeOneLess(productInfo);
 
     return (
-        <Card sx={{ height: 350, maxWidth: 700 }} className="cartBanner-container">
+        <Card className="cartBanner-container">
             <div className="cartBanner-conatiner_bannerMedia">
-               <CardMedia
-               component="img"
-               height="200"
-               image= {productInfo.image_url}
-               alt={productInfo.productName}
-               />
+                <Link to={`/products/product/${productInfo.id}`} className="cartBanner-conatiner_bannerMedia_link">
+                    <CardMedia
+                    component="img"
+                    height="200"
+                    image= {productInfo.image}
+                    alt={productInfo.title}
+                    />
+               </Link>
             </div>
             
             <CardContent 
@@ -43,7 +46,7 @@ const CartBanner: React.FC<{ key: string, id: string}>  = (key): JSX.Element => 
                     variant="h6" 
                     paragraph
                 >
-                    {productInfo.productName}
+                    {productInfo.title}
                 </Typography>
                 <Typography 
                     sx={{ fontSize: 30, fontWeight: 'bold', width: '25%' }}
