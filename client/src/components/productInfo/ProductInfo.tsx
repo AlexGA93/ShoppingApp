@@ -1,22 +1,33 @@
-import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IAppState } from '../../Redux/type';
+import { IAppState, IelementProduct } from '../../Redux/type';
+import { Link } from 'react-router-dom';
+
+import { actionCreators } from '../../Redux';
 
 import { Euro, AddShoppingCart, ShoppingCart } from '@mui/icons-material';
-
 import { Button } from '@mui/material';
 
 import Axes from '../../media/img/axes.png';
 
 import './productInfo.scss';
 
+
 const ProductInfo = () => {
+    const {addToCart} = bindActionCreators(actionCreators, useDispatch());
+    
+    let productId = window.location.pathname.split("/").pop();
+
     // extract id from state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    let product = stateProducts.find((element) => element.id=== productId);
     
-    let product = stateProducts.find((element) => element.id===window.location.pathname.split("/").pop());
-    console.log(product);
     
+    const toggleBuy = () => {
+        addToCart(product as IelementProduct);
+    };
+
     return (
         <div className='product-info'>
             <div className="product-info_title">
@@ -55,18 +66,21 @@ const ProductInfo = () => {
                     {/* Product bio */}
                     <div className='product-info_content_data_bio'>
                         <p>{product?.productDescription}</p>
-                        {/* <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p> */}
                     </div>
                     {/* buttons add and go to cart */}
                     <div className='product-info_content_data_buttons'>
-                        <Button variant="outlined" startIcon={<AddShoppingCart />}>
+                        <Button 
+                        variant="outlined"
+                        onClick={toggleBuy} 
+                        startIcon={<AddShoppingCart 
+                        />}>
                             Add to Cart
                         </Button>
-                        <Button variant="contained" endIcon={<ShoppingCart />}>
-                            Go to Cart
-                        </Button>
+                        <Link to={'/cart'}>
+                            <Button variant="contained" endIcon={<ShoppingCart />}>
+                                Go to Cart
+                            </Button>
+                        </Link>
                         
                     </div>
                 </div>

@@ -50,8 +50,7 @@ const Product = (props: any): JSX.Element => {
         );
     };
     const toggleBuy = () => {
-        addToCart(elementInfo);
-        // console.log(elementInfo); 
+        addToCart(elementInfo); 
     };
 
     useEffect(() => {},[favorite, elementInfo.favorite])
