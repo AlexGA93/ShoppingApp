@@ -103,7 +103,6 @@ export const quitFromFavs = (productData: IelementProduct) => async(dispatch: Di
 };
 // CART
 export const addToCart = (productData: IelementProduct) => async(dispatch: Dispatch<ActionTypes>) => {
-    // console.log(productData);
     
     // Add to local cart state
     try {

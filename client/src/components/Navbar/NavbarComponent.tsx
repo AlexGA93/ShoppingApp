@@ -1,30 +1,27 @@
 
-import HelmetIcon from '../../media/img/helmet.png';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './NavbarComponent.scss';
 import { useSelector } from 'react-redux';
+import { IAppState } from '../../Redux/type';
 
 // icons
 import Cart from '../../media/icon/cart.png';
 import Heart from '../../media/icon/favorite.png';
 import Store from '../../media/icon/online-store.png';
-import { IAppState } from '../../Redux/type';
-import { useEffect } from 'react';
 
+// imgs
+import HelmetIcon from '../../media/img/helmet.png';
 
+import './NavbarComponent.scss';
 
 const NavbarComponent = (): JSX.Element => {
   // If there is favs in array state render length array
   const favsCounter = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
-  // console.log(favsCounter);
   // If there is cart in array state render length array
   const cartCounter = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
 
   // Use hook to deal with life cycle
-  useEffect(() => {
-    console.log(cartCounter);
-
-  }, [cartCounter]);
+  useEffect(() => {}, [favsCounter, cartCounter]);
 
   return (
     <div className='container'>
@@ -36,6 +33,7 @@ const NavbarComponent = (): JSX.Element => {
         </Link>
       </div>
       {/* search section */}
+      
       {/* links section */}
       <nav className='container__links'>
         <ul>

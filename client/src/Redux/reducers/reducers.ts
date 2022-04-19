@@ -1,4 +1,4 @@
-import Cart from '../../components/Pages/Cart/Cart';
+
 import * as types from '../actions/types';
 import { ActionTypes, IelementProduct, stateActions } from '../type';
 
@@ -25,21 +25,23 @@ const shopping = (state = initialState, action: ActionTypes) => {
                 favs: payload
             };
         case types.ADD_TO_FAVS:
-            let isInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
+            // is product in both arrays?
+            var productInProducts = state.products.map( (element: IelementProduct): boolean => element.id === (payload as IelementProduct).id );
+            var productInFavs = state.favs.map( (element: IelementProduct): boolean => element.id === (payload as IelementProduct).id );
 
             return {
                 ...state,
-                products: isInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id === (payload as IelementProduct).id ? { ...element, favorite: 1 } : element) : null,
-                favs: payload
+                products: productInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id === (payload as IelementProduct).id ? { ...element, favorite: 1 } : element) : null,
+                favs: productInFavs.includes(true) ?  null : [...state.favs, payload]
             };
         case types.OUT_OF_FAVS:
-            let dataIsInProducts = state.products.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
-            let isInFavs = state.favs.map((element: IelementProduct): boolean => element.id === (payload as IelementProduct).id);
-            state.favs.splice(isInFavs.indexOf(true), 1);
+            var productInProducts = state.products.map( (element: IelementProduct): boolean => element.id === (payload as IelementProduct).id );
+            var productInFavs = state.favs.map( (element: IelementProduct): boolean => element.id === (payload as IelementProduct).id );
 
             return {
                 ...state,
-                products: dataIsInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id === (payload as IelementProduct).id ? { ...element, favorite: 0 } : element) : null,
+                products: productInProducts.includes(true) ? state.products.map((element: IelementProduct) => element.id === (payload as IelementProduct).id ? { ...element, favorite: 0 } : element) : null,
+                favs: state.favs.filter((element: IelementProduct) => element.id !== (payload as IelementProduct).id)
             };
         case types.ADD_TO_CART:
 
@@ -53,7 +55,6 @@ const shopping = (state = initialState, action: ActionTypes) => {
                     :
                     [...state.cart, { ...inProducts, qty: 1 }],
             };
-
         case types.ADD_ONE_MORE:
 
             let productQtyMore = (payload as IelementProduct).qty ?? 0;
@@ -63,13 +64,10 @@ const shopping = (state = initialState, action: ActionTypes) => {
                     (item: IelementProduct) => (item.id === (payload as IelementProduct).id) ? { ...item, qty: productQtyMore += 1 } : item
 
                 )
-            }
+            };
         case types.REMOVE_ONE_LESS:
 
             let productQtyLess = (payload as IelementProduct).qty ?? 1;
-            // let emptyModel = { favorite: 0, id: "", image_url: "", price: 0, productDescription: "", productName: "", stock: 0, qty: 1 }
-            // console.log(productQtyLess);
-
             return {
                 ...state,
                 cart: (productQtyLess < 2) ? (
@@ -80,7 +78,7 @@ const shopping = (state = initialState, action: ActionTypes) => {
                         qty: (productQtyLess > 0) ? productQtyLess -= 1 : 1
                     } : item)
                 )
-            }
+            };
 
         // ERRORS
 

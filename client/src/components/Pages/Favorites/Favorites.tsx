@@ -1,8 +1,10 @@
 import {useSelector} from 'react-redux';
 import { IAppState, IelementProduct } from '../../../Redux/type';
 
+// imgs
 import Axes from '../../../media/img/axes.png';
 
+// modules
 import Product from '../../Product/Product';
 
 import './Favorites.scss';
@@ -10,6 +12,8 @@ import './Favorites.scss';
 const Favorites = (): JSX.Element => {
 
     const stateFavs = useSelector<IAppState, IAppState['shopping']['favs']>(state => state.shopping.favs);
+    console.log(stateFavs);
+    
     
     return (
         <div className='favorites'>

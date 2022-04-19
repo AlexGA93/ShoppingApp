@@ -1,6 +1,9 @@
 
 import {Link} from 'react-router-dom';
+
 import Button from '@mui/material/Button';
+
+// imgs
 import HelmetIcon from '../../../media/img/helmet.png';
 
 import './Presentation.scss';

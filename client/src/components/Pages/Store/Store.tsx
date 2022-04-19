@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 import ReactPaginate from "react-paginate";
 import {IAppState, IelementProduct} from '../../../Redux/type'
 import Product from '../../Product/Product';
-import Axes from '../../../media/img/axes.png';
 import './Store.scss';
 
 

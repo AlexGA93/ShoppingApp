@@ -1,11 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Typography from '@mui/material/Typography';
-
+import { Card, Button, List, ListItem, Typography } from '@mui/material';
 import { IAppState, IelementProduct } from '../../Redux/type';
 
 import './CartPayment.scss';
