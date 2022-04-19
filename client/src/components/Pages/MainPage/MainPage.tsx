@@ -1,5 +1,8 @@
-import Axes from '../../../media/img/axes.png';
+// modules
 import Store from '../Store/Store';
+
+// imgs
+import Axes from '../../../media/img/axes.png';
 
 import './MainPage.scss';
 

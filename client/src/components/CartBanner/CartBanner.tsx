@@ -1,22 +1,18 @@
-// import React, {createContext, useContext} from 'react';
-import './CartBanner.scss';
+import { bindActionCreators } from 'redux';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState, IelementProduct } from '../../Redux/type';
-import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../Redux';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import {Card, CardContent, CardMedia, Typography } from '@mui/material';
 
+import './CartBanner.scss';
 
 const CartBanner = (props: any):JSX.Element => {
     const {addOneMore, removeOneLess} = bindActionCreators(actionCreators, useDispatch());
     
     const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
     const productInfo = ((stateCart.find(element => element.id === props.id)) as IelementProduct);
-    // console.log(productInfo);
     
     const toggleProductQty = (label: string) => label==='+' ? addOneMore(productInfo) : removeOneLess(productInfo);
 
@@ -68,9 +64,9 @@ const CartBanner = (props: any):JSX.Element => {
                 justifyContent: 'space-evenly'
             }}>
                 
-                <button onClick={() => toggleProductQty('+')}>+1</button>
-                { productInfo.qty }
                 <button onClick={() => toggleProductQty('-')}>-1</button>
+                { productInfo.qty }
+                <button onClick={() => toggleProductQty('+')}>+1</button>
                 
             </CardContent>
             

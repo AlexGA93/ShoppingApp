@@ -2,12 +2,11 @@ import { useSelector } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IAppState } from '../../Redux/type';
 
-import EuroIcon from '@mui/icons-material/Euro';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Button from '@mui/material/Button';
-import Axes from '../../media/img/axes.png';
+import { Euro, AddShoppingCart, ShoppingCart } from '@mui/icons-material';
 
+import { Button } from '@mui/material';
+
+import Axes from '../../media/img/axes.png';
 
 import './productInfo.scss';
 
@@ -50,7 +49,7 @@ const ProductInfo = () => {
                     </div>
                     {/* Product Price */}
                     <div className='product-info_content_data_price'>
-                        <EuroIcon /> 
+                        <Euro /> 
                         <p>{product?.price}</p>
                     </div>
                     {/* Product bio */}
@@ -62,10 +61,10 @@ const ProductInfo = () => {
                     </div>
                     {/* buttons add and go to cart */}
                     <div className='product-info_content_data_buttons'>
-                        <Button variant="outlined" startIcon={<AddShoppingCartIcon />}>
+                        <Button variant="outlined" startIcon={<AddShoppingCart />}>
                             Add to Cart
                         </Button>
-                        <Button variant="contained" endIcon={<ShoppingCartIcon />}>
+                        <Button variant="contained" endIcon={<ShoppingCart />}>
                             Go to Cart
                         </Button>
                         

@@ -1,10 +1,11 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { IAppState, IelementProduct } from '../../../Redux/type';
 
+// modules
 import CartPayment from '../../CartPayment/CartPayment';
 import CartBanner from '../../CartBanner/CartBanner';
 
+// imgs
 import Axes from '../../../media/img/axes.png';
 
 import './Cart.scss';
@@ -12,8 +13,6 @@ import './Cart.scss';
 const Cart = (): JSX.Element => {
 
   const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
-  console.log(stateCart);
-
 
   return (
     <div className="cart-container">

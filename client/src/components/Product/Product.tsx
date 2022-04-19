@@ -2,22 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from "react-router-dom";
-import{actionCreators} from '../../Redux';
-
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import EuroIcon from '@mui/icons-material/Euro';
-import SellIcon from '@mui/icons-material/Sell';
-
-import { IAppState, IelementProduct } from '../../Redux/type';
 import toast from 'react-hot-toast';
+
+import {Button, Card, CardMedia, CardContent, CardActions, IconButton, Typography} from '@mui/material';
+
+import {Favorite, Euro, Sell} from '@mui/icons-material';
+
+import{actionCreators} from '../../Redux';
+import { IAppState, IelementProduct } from '../../Redux/type';
+
 
 import './Product.scss';
 
@@ -26,7 +19,7 @@ import './Product.scss';
 const Product = (props: any): JSX.Element => {
     const {addToFavs, quitFromFavs, addToCart} = bindActionCreators(actionCreators, useDispatch());
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct)
+    const elementInfo = (stateInfo.find(element => element.id === props.id) as IelementProduct);
     
     const [favorite, setFavorite] = useState(elementInfo.favorite);
 
@@ -85,7 +78,7 @@ const Product = (props: any): JSX.Element => {
                     aria-label="euro"
                     className="product-container_cardAction_euroButton"
                 >
-                    <EuroIcon />:{elementInfo?.price}
+                    <Euro />:{elementInfo?.price}
                 </IconButton>
 
                 <IconButton 
@@ -93,7 +86,7 @@ const Product = (props: any): JSX.Element => {
                     onClick={() => toggleAction()}
                     className="product-container_cardAction_favButton"
                     >
-                    <FavoriteIcon style={favorite === 1 ? {color: 'red'} : {}} />
+                    <Favorite style={favorite === 1 ? {color: 'red'} : {}} />
                 </IconButton>
                 
                 <Button
@@ -101,7 +94,7 @@ const Product = (props: any): JSX.Element => {
                     color="primary"
                     size="large"
                     className="product-container_cardAction_sellButton"
-                    startIcon={<SellIcon />}
+                    startIcon={<Sell />}
                     onClick={toggleBuy}
                     style={{backgroundColor: '#48618b'}}
                 >
