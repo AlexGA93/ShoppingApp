@@ -25,12 +25,13 @@ const CartPayment = ():JSX.Element => {
                 sx={{ width: '100%', margin: '10px 0 10px 0' }}
                 key={product.id}
                 secondaryAction={
-                    <div> 
-                        <img src={product.image_url} alt="product_image" /> ${product.price} x{product.qty} 
+                    <div className="cartPayment-container_content_title">
+                        <p>{product.title}</p>
                     </div>
-                }
-            >
-                {product.productName}
+                }>  
+                <div> 
+                    <img src={product.image} alt="product_image" /> ${product.price} x{product.qty} 
+                </div>
             </ListItem>
         
         ): null
@@ -59,7 +60,7 @@ const CartPayment = ():JSX.Element => {
         
         <Typography
         sx={{ fontSize: 27, fontWeight: 'bold' }}
-        className="cartBanner-container_amount_total"
+        className="cartPayment-container_amount"
         variant="body1"
         gutterBottom
         >
@@ -73,8 +74,6 @@ const CartPayment = ():JSX.Element => {
                 Make Payment! 
             </Button>
         </div>
-        
-
     </Card>
   )
 }

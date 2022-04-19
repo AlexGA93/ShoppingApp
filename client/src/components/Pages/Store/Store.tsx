@@ -14,12 +14,14 @@ interface SelectedPagination {
 const Store = (): JSX.Element => {
     //access to the state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
+    // console.log(stateProducts);
+    
 
     const [search, setSearch] = useState("");
     // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
     // products perpage
-    const productsPerPage = 10;
+    const productsPerPage = 6;
     // pages visited
     const pagesVisited = pageNumber*productsPerPage;
 
@@ -29,12 +31,8 @@ const Store = (): JSX.Element => {
     const filteredProducts = search.length === 0 ? (
         stateProducts
         ) : (
-            stateProducts.filter( product => product.productName.toLowerCase().includes(search.toLowerCase()))
+            stateProducts.filter( product => product.title.toLowerCase().includes(search.toLowerCase()))
         )
-
-    const displayProducts = filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
-        <Product className="products__list_element" key={element.id} id={element.id} />
-    ));
 
     // pagination
     const pageCount = Math.ceil((stateProducts? stateProducts.length: 0 )/ productsPerPage);
@@ -55,7 +53,11 @@ const Store = (): JSX.Element => {
             />
             {/* <hr /> */}
              <div className="products__list">
-                {displayProducts}
+                {
+                    filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
+                        <Product className="products__list_element" key={element.id} id={element.id} />
+                    ))
+                }
             </div>
             <div className="products__pagination">
                 <ReactPaginate

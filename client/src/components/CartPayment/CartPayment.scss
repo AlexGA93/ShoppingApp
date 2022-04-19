@@ -12,6 +12,8 @@
     &_title {
         display: flex;
         justify-content: center;
+        white-space: nowrap;
+        
     }
     &_content {
         li {
@@ -20,6 +22,18 @@
         img {
             width: 50px;
         }
+        &_title {
+            p {
+                width: 350px;
+                margin: 0%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+    }
+    &_amount {
+        text-align: center;
     }
     &_buttons {
         display: flex;

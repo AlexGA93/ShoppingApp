@@ -3,9 +3,7 @@
 .products {
     height: auto;
     width: 100%;
-    position: absolute;
     color: $defaultDarkColorFont;
-    // background-color: $backgroundColor;
 
     
     text-align: center;
@@ -14,7 +12,12 @@
       color:$defaultDarkColorFont;
       text-decoration: none;
     }
-
+    input {
+      width: 700px;
+      height: 30px;
+      border-radius: 10px;
+      box-shadow: none !important;
+    }
     &__title {
         display: flex;
         flex-direction: row;
@@ -22,7 +25,6 @@
         
         padding: 25px 0 25px 0;
         align-items: center;
-        //color:$defaultLightColorFont;
 
         h3 {
           margin:0 20px 0 20px;
@@ -36,23 +38,7 @@
       background-image: linear-gradient(to center, transparent, #CCC, transparent); 
   }
 
-    &__list {
-        margin: 100px;// 0 auto;
-
-        //width: 1100px;
-        padding-left: 10px;
-        
-        display: grid;
-        grid-template-columns: auto auto auto auto auto;
-        column-gap: 20px;
-        row-gap: 20px;
-        justify-content: center;
-
-
-        // display: flex;
-        // flex-direction:row;
-        // flex-wrap: wrap;
-    }
+    
     &__pagination {
         margin-top: 50px;
         width: 100%;

@@ -1,11 +1,19 @@
 @import '../../scss/index.scss';
 .product-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
 
-    // margin: 10px 10px 20px 10px;
-    width: 300px;
-    height: 380px;
+    width: 350px;
+    height: 600px;
+
     box-shadow: none !important;
-
+    &_cardMedia{
+        max-width: 100%;
+        height: auto;
+        
+    }
     
     &_cardContent {
         height: 50px;
@@ -14,6 +22,6 @@
     &_cardAction {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 }

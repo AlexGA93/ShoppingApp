@@ -36,7 +36,7 @@ import {ActionTypes, IelementProduct} from '../type';
 
 export const getAllProducts = () => async (dispatch: Dispatch<ActionTypes>) => {
     await api
-    .get("/products/list")
+    .get("/products")
     .then((response) => {
         dispatch({
             type: GET_ALL_PRODUCTS,

@@ -21,7 +21,9 @@ const ProductInfo = () => {
 
     // extract id from state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    let product = stateProducts.find((element) => element.id=== productId);
+    let product = stateProducts.find((element: IelementProduct) => element.id.toString() === productId?.toString());
+    console.log(product);
+    
     
     
     const toggleBuy = () => {
@@ -40,7 +42,7 @@ const ProductInfo = () => {
                 <div className='product-info_content_media'>
                     {/* Product Image */}
                     
-                    <img src={product?.image_url} alt={product?.productName} />
+                    <img src={product?.image} alt={product?.title} />
                     
                     {/* Product Favorite Icon */}
                     <div className='product-info_content_media_fav'>
@@ -56,7 +58,7 @@ const ProductInfo = () => {
                 <div className='product-info_content_data'>
                     {/* Product Name */}
                     <div className='product-info_content_data_name'>
-                        <h2>{product?.productName}</h2>
+                        <h2>{product?.title}</h2>
                     </div>
                     {/* Product Price */}
                     <div className='product-info_content_data_price'>
@@ -65,7 +67,7 @@ const ProductInfo = () => {
                     </div>
                     {/* Product bio */}
                     <div className='product-info_content_data_bio'>
-                        <p>{product?.productDescription}</p>
+                        <p>{product?.description}</p>
                     </div>
                     {/* buttons add and go to cart */}
                     <div className='product-info_content_data_buttons'>

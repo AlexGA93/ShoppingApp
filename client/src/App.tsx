@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
 
     useEffect(() => {
         dispatch(getAllProducts());
-        dispatch(getAllFavs())
+        // dispatch(getAllFavs())
     }, [dispatch]);
   return (
       
