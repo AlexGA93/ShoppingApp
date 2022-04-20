@@ -1,0 +1,81 @@
+@import '../../scss/index.scss';
+
+$animation_time: 3s;
+$position: relative;
+$height__width: 90px;
+
+@function icons_props($animation, $seconds){
+    @return $animation $seconds infinite ease-in-out;
+}
+
+.loader_container {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_axe1 {
+        position: $position;
+        animation: axe1_animation 3s infinite ease-in-out;
+        img {
+            height: $height__width;
+            width: 90px;
+        }
+    }
+
+    &_helmet {
+        position: $position;
+        animation: icons_props(helmet_animation, $animation_time);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 2;
+        
+        img {
+            height: $height__width;
+            width: 90px;
+            margin-left: 10px;
+        }
+    }
+
+    &_axe2 {
+        position: $position;
+        animation: icons_props(axe2_animation, $animation_time);
+        right: 0%;
+        img {
+            height: $height__width;
+            width: 90px;
+        }
+    }
+}
+
+@keyframes axe1_animation {
+    0%{ left:0px; }
+    20%,100% {
+        left: 50%;
+        transform: rotate(420deg) ;
+    }
+}
+
+@keyframes helmet_animation {
+    0%{ right:0px; }
+    20%,100% {
+        top: 0%;
+    }
+}
+
+@keyframes axe2_animation {
+    0%{ right:0px; }
+    20%,100% {
+        right: 50%;
+        transform: rotate(-420deg) ;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .loader_container {
+        &_helmet {
+            left: 12%;
+        }
+    }
+}

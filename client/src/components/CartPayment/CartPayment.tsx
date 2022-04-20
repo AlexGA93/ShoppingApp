@@ -8,14 +8,15 @@ import './CartPayment.scss';
 
 
 const CartPayment = ():JSX.Element => {
+     
     // access to cart state to calculate total Price
     const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
     // console.log(stateCart);
 
     const totalAmountCalc = () => {
-        let total = 0;
-        stateCart.forEach((element: IelementProduct) => total+=(element.price*(element.qty ?? 1)))
-        return total;
+        var total = 0;
+        stateCart.forEach((element: IelementProduct) => total+=(element.price*(element.qty ?? 1)))  
+        return Number.parseFloat(total.toString()).toFixed(2);
     };
     
     const productList = stateCart.map((product: IelementProduct) => 

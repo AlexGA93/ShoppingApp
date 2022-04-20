@@ -9,38 +9,49 @@ import CartBanner from '../../CartBanner/CartBanner';
 import Axes from '../../../media/img/axes.png';
 
 import './Cart.scss';
+import LoadingComponent from '../../Loading/LoadingComponent';
 
 const Cart = (): JSX.Element => {
 
   const stateCart = useSelector<IAppState, IAppState['shopping']['cart']>(state => state.shopping.cart);
 
   return (
-    <div className="cart-container">
-
-      <div className="cart-container_title">
-        <img alt="axes" src={Axes} style={{ width: '60px' }} />
-        <h3>Shopping Cart</h3>
-        <img alt="axes" src={Axes} style={{ width: '60px' }} />
-      </div>
-
-      <div className="cart-container_content">
-        <div className="cart-container_content_list">
-          {
-            stateCart && stateCart.length !== 0 ? (
-              stateCart.map((element: IelementProduct) => element.qty ?? 1 >= 1 ? (
-                <CartBanner key={element.id} id={element.id} />
-              ) : null)
-            ) : (
-              <h2>It seems that there's nothing here...</h2>
-            )
-          }
+    stateCart.length !==0 ? (
+      <div className="cart-container">
+        <div className="cart-container_title">
+          <img alt="axes" src={Axes} style={{ width: '60px' }} />
+          <h3>Shopping Cart</h3>
+          <img alt="axes" src={Axes} style={{ width: '60px' }} />
         </div>
 
-        <div className="cart-container_content_payment">
-          <CartPayment />
+        <div className="cart-container_content">
+          <div className="cart-container_content_list">
+            {
+              stateCart.map((element: IelementProduct) => <CartBanner key={element.id} id={element.id} />) 
+
+              // stateCart && stateCart.length !== 0 ? (
+              //   stateCart.map((element: IelementProduct) => element.qty ?? 1 >= 1 ? (
+              //     <CartBanner key={element.id} id={element.id} />
+              //   ) : null)
+              // ) : (
+              //   <h2>It seems that there's nothing here...</h2>
+              // )
+            }
+          </div>
+
+          <div className="cart-container_content_payment">
+            <CartPayment />
+          </div>
         </div>
       </div>
-    </div>
+    ):(
+      <>
+       <h2>It seems that there's nothing here...</h2>
+       <LoadingComponent />
+      </>
+      
+    )
+    
   )
 }
 
