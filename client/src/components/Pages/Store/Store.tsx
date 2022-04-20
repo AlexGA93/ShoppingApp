@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import ReactPaginate from "react-paginate";
 import {IAppState, IelementProduct} from '../../../Redux/type'
 import Product from '../../Product/Product';
 import './Store.scss';
+import LoadingComponent from '../../Loading/LoadingComponent';
 
 
 interface SelectedPagination {
@@ -14,12 +15,12 @@ interface SelectedPagination {
 const Store = (): JSX.Element => {
     //access to the state
     const stateProducts = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
-    // console.log(stateProducts);
+    console.log(stateProducts);
     
 
     const [search, setSearch] = useState("");
-    // pages numbers
     const [pageNumber, setPageNumber] = useState(0);
+
     // products perpage
     const productsPerPage = 6;
     // pages visited
@@ -41,43 +42,47 @@ const Store = (): JSX.Element => {
         setPageNumber(selected);
     };
 
+    
     return (
-       
-        <div className="products">
-            {/* search bar */}
-            <input 
-                type="text"
-                placeholder="Product Name"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)} 
-            />
-            {/* <hr /> */}
-             <div className="products__list">
-                {
-                    filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
-                        <Product className="products__list_element" key={element.id} id={element.id} />
-                    ))
-                }
-            </div>
-            <div className="products__pagination">
-                <ReactPaginate
-                    previousLabel={"<"}
-                    nextLabel={">"}
-                    marginPagesDisplayed={1}
-                    pageRangeDisplayed={1}
-                    pageCount={pageCount}
-                    onPageChange={changePage}
-                    breakLabel={"."}
-                    containerClassName={"paginationBttns"}
-                    previousLinkClassName={"previousBttn"}
-                    nextLinkClassName={"nextBttn"}
-                    disabledClassName={"paginationDisabled"}
-                    activeClassName={"paginationActive"}
+        stateProducts.length !==0 ? (
+            <div className="products">
+                {/* search bar */}
+                <input 
+                    type="text"
+                    placeholder="Product Name"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)} 
                 />
-            </div>
+                {/* <hr /> */}
+                <div className="products__list">
+                    {
+                        filteredProducts.slice(pagesVisited, pagesVisited+productsPerPage).map((element: IelementProduct) => (
+                            <Product className="products__list_element" key={element.id} id={element.id} />
+                        ))
+                    }
+                </div>
+                <div className="products__pagination">
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={1}
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        breakLabel={"."}
+                        containerClassName={"paginationBttns"}
+                        previousLinkClassName={"previousBttn"}
+                        nextLinkClassName={"nextBttn"}
+                        disabledClassName={"paginationDisabled"}
+                        activeClassName={"paginationActive"}
+                    />
+                </div>
 
-        <div>© 2021 Vikingz Shop · Built by <a href="https://github.com/AlexGA93">Alejandro Gimeno Ataz</a></div>
+            <div>© 2021 Vikingz Shop · Built by <a href="https://github.com/AlexGA93">Alejandro Gimeno Ataz</a></div>
         </div>
+        ):(
+            <LoadingComponent />
+        )
     )
 }
 

@@ -21,7 +21,7 @@ const Product: React.FC<{ className:string, key: string, id: string}> = (key): J
     const stateInfo = useSelector<IAppState, IAppState['shopping']['products']>(state => state.shopping.products);
     
     const elementInfo = (stateInfo.find(element => element.id === key.id) as IelementProduct);
-    console.log(elementInfo);
+    
     
     
     const [favorite, setFavorite] = useState(elementInfo.favorite);

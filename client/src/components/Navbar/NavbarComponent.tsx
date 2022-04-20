@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { IAppState } from '../../Redux/type';
 
 // icons
-import Cart from '../../media/icon/cart.png';
-import Heart from '../../media/icon/favorite.png';
-import Store from '../../media/icon/online-store.png';
+import Cart from '../../media/icon/icons8-cart-64.png';
+import Heart from '../../media/icon/icons8-heart-puzzle-64.png';
+import Store from '../../media/icon/icons8-store-64.png';
 
 // imgs
 import HelmetIcon from '../../media/img/helmet.png';

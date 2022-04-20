@@ -60,7 +60,7 @@ const shopping = (state = initialState, action: ActionTypes) => {
                 cart: inCart ?
                     state.cart.map((item: IelementProduct) => item.id === (payload as IelementProduct).id ? { ...item, qty: item.qty ? item.qty + 1 : null } : item)
                     :
-                    [...state.cart, { ...inProducts, qty: 1 }],
+                    [...state.cart, { ...inProducts, qty: 1 }]
             };
         case types.ADD_ONE_MORE:
 
