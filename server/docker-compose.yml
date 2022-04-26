@@ -1,0 +1,21 @@
+
+version : '3'
+services:
+    server:
+        container_name: server_docker
+        restart: always
+        build: .
+        ports:
+            - "${PORT}:${PORT}"
+        links:
+            - database
+        volumes: 
+            - .:/usr/src/app
+    database:
+        container_name: database_mongo
+        image: mongo
+        ports:
+            - "27017:27017"
+        logging:
+            driver:
+                none
