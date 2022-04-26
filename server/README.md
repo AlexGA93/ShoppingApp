@@ -166,10 +166,17 @@ Useful commands:
     ```
 ## 6. Docker compose
 To init both of our server and database images at the same time, we can use the following command:
-```
-sudo docker-compose up
-```
-or if we want to stop service
-```
-sudo docker-compose stop
-```
+
+- To build our project on docker compose
+    ```
+    sudo docker-compose build
+    ```
+- To set up our project 
+    ```
+    sudo docker-compose up
+    ```
+
+- Or if we want to stop service
+    ```
+    sudo docker-compose down
+    ```
