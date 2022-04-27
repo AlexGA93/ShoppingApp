@@ -46,5 +46,5 @@ const userSchema =  new mongoose.Schema({
     },
 });
 
-const UserModel = model<apiProductType>("Product", userSchema);
+const UserModel = model<apiProductType>("user", userSchema);
 export default UserModel;
