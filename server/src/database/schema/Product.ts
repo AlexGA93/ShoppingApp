@@ -1,4 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose,{model} from 'mongoose';
+
+//types
+import { apiProductType } from '../../types/types';
 
 const productSchema =  new mongoose.Schema({
     title: {
@@ -27,7 +30,7 @@ const productSchema =  new mongoose.Schema({
 
     favorite: {
         type: Boolean,
-        required: true
+        // required: true
     },
 
     rating: {
@@ -38,7 +41,7 @@ const productSchema =  new mongoose.Schema({
 
         qty: {
             type: Number,
-            required: true
+            // required: true
         },
 
         count: {
@@ -48,4 +51,6 @@ const productSchema =  new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("users", productSchema);
+// export default productSchema;
+const ProductModel = model<apiProductType>("Product", productSchema);
+export default ProductModel;

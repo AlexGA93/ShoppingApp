@@ -7,8 +7,9 @@ require('dotenv').config();
 require('./database/database');
 
 // routes
-const userRoutes = require('./routes/api/userRoutes');
-const productRoutes = require('./routes/api/productRoutes');
+import databaseRoute from './routes/api/dbRoutes';
+// const userRoutes = require('./routes/api/userRoutes');
+// const productRoutes = require('./routes/api/productRoutes');
 
 const app: Application = express();
 const port = process.env.PORT || 3000;
@@ -21,8 +22,9 @@ app.get('/', (req: Request, res: Response): void => {
 });
 
 // routes
-app.use('/user', userRoutes);
-app.use('/product', productRoutes);
+app.use('/admin', databaseRoute);
+// app.use('/user', userRoutes);
+// app.use('/product', productRoutes);
 
 app.listen(port, (): void => {
   return console.log(`Express is listening at http://localhost:${port}`);
