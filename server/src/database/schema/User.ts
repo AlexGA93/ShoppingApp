@@ -20,6 +20,29 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: true,
     },
+
+    address: {
+        street: {
+            type: String,
+            required: true,
+        },
+        zip: {
+            type: String,
+            required: true,
+        },
+        region: {
+            type: String,
+            required: true,
+        },
+        city: {
+            type: String,
+            required: true,
+        },
+        country: {
+            type: String,
+            required: true,
+        }
+    },
 });
 
 // module.exports = User = mongoose.model("users", userSchema);
