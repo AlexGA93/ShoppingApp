@@ -49,10 +49,15 @@ npm install -g typescript
 ```
 tsc --init
 ```
-## 4. Dependencies
+## 4. Dependencies 
 
 ```
-npm install express express-validator bcryptjs mongoose concurrently dotenv jsonwebtoken 
+npm install express express-validator bcryptjs mongoose concurrently dotenv jsonwebtoken helmet morgan
+```
+and 
+```
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
+
 ```
 and
 ```
@@ -65,6 +70,26 @@ To the typescript's support dependencies:
 npm i @types/express
 npm i @types/bcryptjs
 npm i @types/jsonwebtoken
+```
+
+### package.json
+Define commands scrpts to:
+    - Convert development code to production
+    - Start server in development mode
+    ```
+    "scripts": {
+        "dev": "nodemon src/index.ts --exec babel-node",
+        "start": "node build/index.ts"
+    },
+    ```
+With this orders we can do the following actions:
+- Generate code in development mode
+```
+npm run dev
+```
+- Generate code to deploy after production
+```
+npm run start
 ```
 
 ## 5. Dockerfile
@@ -180,3 +205,4 @@ To init both of our server and database images at the same time, we can use the 
     ```
     sudo docker-compose down
     ```
+## 7. JWT

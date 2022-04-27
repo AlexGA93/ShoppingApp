@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose,{model} from 'mongoose';
+import { apiProductType } from '../../types/type';
 
 const userSchema =  new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -17,7 +18,7 @@ const userSchema =  new mongoose.Schema({
     },
     
     age: {
-        type: String,
+        type: Number,
         required: true,
     },
 
@@ -45,6 +46,5 @@ const userSchema =  new mongoose.Schema({
     },
 });
 
-// module.exports = User = mongoose.model("users", userSchema);
-
-module.exports = mongoose.model("users", userSchema);
+const UserModel = model<apiProductType>("Product", userSchema);
+export default UserModel;
