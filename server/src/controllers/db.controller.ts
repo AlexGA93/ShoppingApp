@@ -1,19 +1,16 @@
 import axios from 'axios';
-
 //  import express
 import express, {Router, Request, Response} from 'express';
 // Defining Router
 const dbRouter: Router = Router();
-// express validator
-// const {body, validationResult} = require('express-validator');
 
-import { apiProductType } from '../../types/types';
+const Product = require('../database/schema/Product');
 
-import Product from '../../database/schema/Product';
+import { apiProductType } from '../types/type';
 
-const apiUrl: string = 'https://fakestoreapi.com/products';
-
-dbRouter.get('/products',  async (req: Request, res: Response) => {
+export const updateDb = async (req:Request, res:Response) => {
+    
+    const apiUrl: string = 'https://fakestoreapi.com/products';
     //axios api call
     var dataProduct = await axios.get<apiProductType[]>(apiUrl);
 
@@ -22,7 +19,7 @@ dbRouter.get('/products',  async (req: Request, res: Response) => {
 
         // defining a new product model to store
         var productDetails = new Product({
-            id: element.id,
+            id: element._id,
             title: element.title,
             price: element.price,
             description: element.description,
@@ -41,8 +38,4 @@ dbRouter.get('/products',  async (req: Request, res: Response) => {
 
     // send data
     res.send('Updated database');
-    
-});
-
-export default dbRouter;
-
+};
