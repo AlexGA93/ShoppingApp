@@ -1,5 +1,5 @@
 export declare interface apiProductType {
-    id: number,
+    _id: number,
     title: string,
     price: number,
     description: string,
@@ -12,6 +12,7 @@ export declare interface apiProductType {
 }
 
 export declare interface apUserType {
+    _id?: string,
     username: string,
     email: string,
     password: string,

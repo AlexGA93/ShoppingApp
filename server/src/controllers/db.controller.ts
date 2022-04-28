@@ -19,7 +19,7 @@ export const updateDb = async (req:Request, res:Response) => {
 
         // defining a new product model to store
         var productDetails = new Product({
-            id: element.id,
+            id: element._id,
             title: element.title,
             price: element.price,
             description: element.description,
