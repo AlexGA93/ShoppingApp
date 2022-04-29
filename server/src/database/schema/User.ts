@@ -6,7 +6,6 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: true
     },
-
     email: {
         type: String,
         required: true,
@@ -16,12 +15,10 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: true,
     },
-    
     age: {
         type: Number,
         required: true,
     },
-
     address: {
         street: {
             type: String,
@@ -44,6 +41,17 @@ const userSchema =  new mongoose.Schema({
             required: true,
         }
     },
+    paymentInto: {
+        bankName: {
+            type: String
+        },
+        accountNumber: {
+            type: String
+        },
+        secretNumber: {
+            type: Number
+        }
+    }
 });
 
 const UserModel = model<apiProductType>("user", userSchema);

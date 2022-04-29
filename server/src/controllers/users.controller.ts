@@ -13,7 +13,7 @@ import UserModel from '../database/schema/User';
 // types
 import { apiProductType, apUserType } from '../types/type';
 
-
+                /* Authentication */
 export const signUp = async (req: Request, res: Response) => {
     // res.json(req.body);
     try {
@@ -38,6 +38,11 @@ export const signUp = async (req: Request, res: Response) => {
                 region: req.body.address.region,
                 city: req.body.address.city,
                 country: req.body.address.country
+            },
+            paymentInfo: {
+                bankName: req.body.payment.bankName,
+                accountNumber: req.body.payment.accountNumber,
+                secretNumber: req.body.payment.secretNumber 
             }
         }
         user = new UserModel(userInfo);
@@ -62,11 +67,6 @@ export const signUp = async (req: Request, res: Response) => {
 
 export const signIn = async (req: Request, res: Response) => {
 
-    // check if user exists (no -> error status)
-    // if user exists,
-        // hash password
-        // compare hashed password with user password
-            // if password equels to user's, sign token
     try {
         const {email, password} = req.body;
         
@@ -90,6 +90,28 @@ export const signIn = async (req: Request, res: Response) => {
     } catch (err: any) {
         console.error(err.message)
         res.status(500).send('Error during Login process')
+    }
+};
+
+                /* Credentials Modification */
+export const editUsername = async(req: Request, res: Response) => {
+    try {
+        const { id, username } = req.params;
+
+        // check if user is in database
+        let user = await UserModel.findById(id);
+        
+        if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+        console.log(username);
+        
+        const updatedUser = await UserModel.findByIdAndUpdate({_id:id},{username});
+
+        res.status(200).send(updatedUser);
+
+    } catch (err: any) {
+        console.error(err.message);
+        res.status(500).send(`Error updating user's username`);
     }
 };
 

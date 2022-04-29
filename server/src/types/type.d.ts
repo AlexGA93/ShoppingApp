@@ -23,5 +23,10 @@ export declare interface apUserType {
         region:string,
         city: string,
         country: string
+    },
+    paymentInfo: {
+        bankName: string,
+        accountNumber: string,
+        secretNumber: number
     }
 }
