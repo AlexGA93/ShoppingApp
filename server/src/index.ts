@@ -1,8 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import morgan from 'morgan';
 
-// dotenv
-require('dotenv').config();
+import config from './config';
 
 //database
 require('./database/database');
@@ -13,7 +12,7 @@ import userRoutes from './routes/userRoutes';
 // const productRoutes = require('./routes/api/productRoutes');
 
 const app: Application = express();
-const port = process.env.PORT || 3000;
+const port = config.PORT || 3000;
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));

@@ -1,7 +1,7 @@
-// crypto
-import crypto from 'crypto';
 // jwt
 import jwt from 'jsonwebtoken';
+// secret
+import config from '../config';
 //  import express
 import {Router, Request, Response} from 'express';
 // Defining Router
@@ -15,10 +15,10 @@ import { apiProductType, apUserType } from '../types/type';
 
                 /* Authentication */
 export const signUp = async (req: Request, res: Response) => {
-    // res.json(req.body);
     try {
         // check if there is a user named as the entered one
         let user = await UserModel.findOne({ email: req.body.email });
+        // console.log(user);
         
         if (user) {
             res.status(400).json({ errors: [{ msg: "User already exists" }] });
@@ -40,18 +40,18 @@ export const signUp = async (req: Request, res: Response) => {
                 country: req.body.address.country
             },
             paymentInfo: {
-                bankName: req.body.payment.bankName,
-                accountNumber: req.body.payment.accountNumber,
-                secretNumber: req.body.payment.secretNumber 
+                bankName: req.body.paymentInfo.bankName,
+                accountNumber: req.body.paymentInfo.accountNumber,
+                secretNumber: req.body.paymentInfo.secretNumber 
             }
         }
+
         user = new UserModel(userInfo);
 
         const savedUser = await user.save();
 
         // sign jwt
-        const secretKey = crypto.randomBytes(39).toString('hex');
-        jwt.sign({id: savedUser._id}, secretKey ,{expiresIn: 10}, (err, token) => {
+        jwt.sign({id: savedUser._id}, config.SECRET ,{expiresIn: 10}, (err, token) => {
             if (err) throw err;
             // return token
             res.status(200).send({token});
@@ -80,8 +80,7 @@ export const signIn = async (req: Request, res: Response) => {
         if (!isMatch) res.status(400).json({ errors: [{ msg: "Invalid Password" }] });
         
         // jwt
-        const secretKey = crypto.randomBytes(39).toString('hex');
-        jwt.sign({id: user?._id}, secretKey ,{expiresIn: 10}, (err, token) => {
+        jwt.sign({id: user?._id}, config.SECRET ,{expiresIn: 100}, (err, token) => {
             if (err) throw err;
             // return token
             res.status(200).send({token});
@@ -94,20 +93,71 @@ export const signIn = async (req: Request, res: Response) => {
 };
 
                 /* Credentials Modification */
-export const editUsername = async(req: Request, res: Response) => {
-    try {
-        const { id, username } = req.params;
+export const editBasicInfo= async(req: Request, res: Response) => {
 
-        // check if user is in database
-        let user = await UserModel.findById(id);
+    // let flagKey = Object.entries(req.body)[0][0]; // username
+    // let keyValue = Object.keys(req.body)[0][0]; // name
+
+    // console.log(flagKey+'  '+keyValue);
+    
+    let userName = req.body.username;
+    // console.log(userName);
+    
+    let id = req.params.id;
+
+    try {
+        let user = await UserModel.findById(id)
+        // console.log(user);
         
         if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-        console.log(username);
-        
-        const updatedUser = await UserModel.findByIdAndUpdate({_id:id},{username});
+        await UserModel.findByIdAndUpdate({_id:id},{username:userName});
 
-        res.status(200).send(updatedUser);
+        res.status(200).send("Updated username");
+
+    } catch (err: any) {
+        console.error(err.message);
+        res.status(500).send(`Error updating user's username`);
+    }
+};
+
+export const editAddressInfo= async(req: Request, res: Response) => {
+    
+    console.log(req.params.id); // id
+    console.log(Object.entries(req.body)[0][0]); 
+
+    let flag = Object.entries(req.body)[0][0]; // data to change
+    let id = req.params.id;
+
+    try {
+        let user = await UserModel.findById(id);
+        if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+        await UserModel.findByIdAndUpdate({_id:id},{address:{flag}});
+
+        res.status(200).send("Updated address");
+
+    } catch (err: any) {
+        console.error(err.message);
+        res.status(500).send(`Error updating user's username`);
+    }
+};
+
+export const editPaymentInfo= async(req: Request, res: Response) => {
+    
+    console.log(req.params.id); // id
+    console.log(Object.entries(req.body)[0][0]); 
+
+    let flag = Object.entries(req.body)[0][0]; // data to change
+    let id = req.params.id;
+
+    try {
+        let user = await UserModel.findById(id);
+        if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+        await UserModel.findByIdAndUpdate({_id:id},{paymentInfo:{flag}});
+
+        res.status(200).send("Updated payment");
 
     } catch (err: any) {
         console.error(err.message);
