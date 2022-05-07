@@ -206,3 +206,91 @@ To init both of our server and database images at the same time, we can use the 
     sudo docker-compose down
     ```
 ## 7. JWT
+We're going to apply jwt middleware for user's validation and routes protection. First of all we need to know that our application will use a generated string called **token**. This token will ve signed in every operation that we need. For example in sign in or sign up a user:
+
+```
+export const signUp = async (req: Request, res: Response) => {
+    try {
+        // check if there is a user named as the entered one
+        
+        // hash password
+        
+        // load user info to store it
+        let userInfo:apUserType = {
+            ...
+        }
+        user = new UserModel(userInfo);
+
+        const savedUser = await user.save();
+
+        // sign jwt
+        jwt.sign(
+            { id: savedUser._id},
+            config.SECRET ,
+            { expiresIn: 86400 },
+            (err, token) => {
+                if (err) throw err;
+
+                // return token
+                res.status(200).send({token});
+
+                return; 
+        });
+
+
+    } catch (err: any) {
+        console.error(err.message);
+        res.status(500).send("Error during Registration process");
+    }
+};
+```
+We can see that our token will be 'generated' with the user's id, a string called 'secret' and a number as expiration (in seconds). A valid example of a generated token with a login process could be:
+```
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzE1NTY3Y2Y4YzBiZDQzNmE5OThhZiIsImlhdCI6MTY1MTYwNTY1NSwiZXhwIjoxNjUxNjA1NzU1fQ.ESH6IwzfzE15ovgF0LIQTedYHq4ofONFGVimruX6e6I"
+}
+```
+This process is the same for a registration action. But, why is our code returning a string? That will be pass throught a validation process at the moment we access to another route that will need a user's information.
+
+In the login process our app will load the user's dashboard once we have been logged in. For this reload, our server must have sent the login token and been validated.
+
+- 1. Log in route
+```
+dbRouter.post('/signin', userMethods.signIn);
+```
+- 2. We obtain a token
+```
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzE1NTY3Y2Y4YzBiZDQzNmE5OThhZiIsImlhdCI6MTY1MTYwNTY1NSwiZXhwIjoxNjUxNjA1NzU1fQ.ESH6IwzfzE15ovgF0LIQTedYHq4ofONFGVimruX6e6I"
+```
+- 3. Load a protected route that will need a token validation
+```
+import { verifyToken } from '../middleware/authJWT';
+dbRouter.put('/username/:id', verifyToken, userMethods.editBasicInfo);
+```
+- 4. Validation process
+```
+export const verifyToken = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+    ) => {
+        const token: RequestType = req.headers;
+        // check headers
+        let secret = config.SECRET;
+        
+        //check if there's token
+        if(!token) res.status(403).json({message:"No token provided"});
+        
+        // check if there's a valid token extracting token's info        
+        let {id} = jwt.verify((token['x-access-token'] ?? ''), secret) as decodedType;
+        
+        // check if user exists by id
+        const user = await UserModel.findById(id, {password:0});
+        
+        if(!user) return res.status(404).json({message:'user not found'})
+        
+        // pass to the next route
+        next();
+        
+}
+```
