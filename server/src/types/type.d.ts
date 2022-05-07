@@ -1,5 +1,5 @@
 export declare interface apiProductType {
-    _id: number,
+    private _id: number,
     title: string,
     price: number,
     description: string,
@@ -23,5 +23,29 @@ export declare interface apUserType {
         region:string,
         city: string,
         country: string
+    },
+    paymentInfo: {
+        bankName: string,
+        accountNumber: string,
+        secretNumber: number
     }
+}
+
+export declare interface Config {
+    MONGO_URI?: string,
+    PORT?: string,
+    SECRET: string
+};
+
+export interface RequestType {
+    host?:             string;
+    "user-agent"?:     string;
+    "content-type"?:   string;
+    "x-access-token"?:   string;
+    accept?:           string;
+    "content-length"?: string;
+}
+
+export declare interface decodedType {
+    id: string
 }

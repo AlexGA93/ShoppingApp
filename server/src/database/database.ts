@@ -1,9 +1,13 @@
+// mongoose
 const mongoose = require('mongoose');
+
+// config
+import config from '../config';
 
 // dotenv
 require('dotenv').config();
 
-const db = process.env.MONGO_URI;
+const db = config.MONGO_URI;
 
 mongoose.connect(
     db,{

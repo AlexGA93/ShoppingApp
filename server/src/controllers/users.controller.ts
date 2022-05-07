@@ -1,7 +1,7 @@
-// crypto
-import crypto from 'crypto';
 // jwt
 import jwt from 'jsonwebtoken';
+// secret
+import config from '../config';
 //  import express
 import {Router, Request, Response} from 'express';
 // Defining Router
@@ -13,12 +13,12 @@ import UserModel from '../database/schema/User';
 // types
 import { apiProductType, apUserType } from '../types/type';
 
-
+                /* Authentication */
 export const signUp = async (req: Request, res: Response) => {
-    // res.json(req.body);
     try {
         // check if there is a user named as the entered one
         let user = await UserModel.findOne({ email: req.body.email });
+        // console.log(user);
         
         if (user) {
             res.status(400).json({ errors: [{ msg: "User already exists" }] });
@@ -38,15 +38,20 @@ export const signUp = async (req: Request, res: Response) => {
                 region: req.body.address.region,
                 city: req.body.address.city,
                 country: req.body.address.country
+            },
+            paymentInfo: {
+                bankName: req.body.paymentInfo.bankName,
+                accountNumber: req.body.paymentInfo.accountNumber,
+                secretNumber: req.body.paymentInfo.secretNumber 
             }
         }
+
         user = new UserModel(userInfo);
 
         const savedUser = await user.save();
 
         // sign jwt
-        const secretKey = crypto.randomBytes(39).toString('hex');
-        jwt.sign({id: savedUser._id}, secretKey ,{expiresIn: 10}, (err, token) => {
+        jwt.sign({id: savedUser._id}, config.SECRET ,{expiresIn: 3600}, (err, token) => {
             if (err) throw err;
             // return token
             res.status(200).send({token});
@@ -62,11 +67,6 @@ export const signUp = async (req: Request, res: Response) => {
 
 export const signIn = async (req: Request, res: Response) => {
 
-    // check if user exists (no -> error status)
-    // if user exists,
-        // hash password
-        // compare hashed password with user password
-            // if password equels to user's, sign token
     try {
         const {email, password} = req.body;
         
@@ -80,8 +80,7 @@ export const signIn = async (req: Request, res: Response) => {
         if (!isMatch) res.status(400).json({ errors: [{ msg: "Invalid Password" }] });
         
         // jwt
-        const secretKey = crypto.randomBytes(39).toString('hex');
-        jwt.sign({id: user?._id}, secretKey ,{expiresIn: 10}, (err, token) => {
+        jwt.sign({id: user?._id}, config.SECRET ,{expiresIn: 3600}, (err, token) => {
             if (err) throw err;
             // return token
             res.status(200).send({token});
@@ -93,4 +92,227 @@ export const signIn = async (req: Request, res: Response) => {
     }
 };
 
+                /* Credentials Modification */
+export const editUsername= async(req: Request, res: Response) => {
+
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel
+    .findByIdAndUpdate(id,{username:keyValue})
+    .then(user => {
+        res.status(200).send('User credentials has been updated');
+    })
+    .catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editEmail= async(req: Request, res: Response) => {
+
+    let flagKey = Object.entries(req.body)[0][0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel
+    .findByIdAndUpdate(id,{email:keyValue})
+    .then(user => {
+        res.status(200).send('User credentials has been updated');
+    })
+    .catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editPassword= async(req: Request, res: Response) => {
+
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    // hash password
+    const hashedPassword = bcrypt.hashSync(keyValue, bcrypt.genSaltSync(10));
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel
+    .findByIdAndUpdate(id,{password:hashedPassword})
+    .then(user => {
+        res.status(200).send('User credentials has been updated');
+    })
+    .catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+
+
+export const editAddressStreetInfo= async(req: Request, res: Response) => {
+    
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'address.street': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editAddressZipInfo= async(req: Request, res: Response) => {
+    
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'address.zip': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editAddressRegionInfo= async(req: Request, res: Response) => {
+    
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'address.region': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editAddressCityInfo= async(req: Request, res: Response) => {
+    
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'address.city': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editAddressCountryInfo= async(req: Request, res: Response) => {
+    
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'address.country': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+
+
+export const editPaymentBankNameInfo= async(req: Request, res: Response) => {
+    
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'paymentInfo.bankName': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editPaymentAccountNumInfo= async(req: Request, res: Response) => {
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'paymentInfo.accountNumber': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
+export const editPaymentSecretNumInfo= async(req: Request, res: Response) => {
+    let flagKey = Object.keys(req.body)[0]; // key
+    let keyValue = req.body[flagKey]; // value
+    let id = req.params.id;
+
+    let user = await UserModel.findById(id);
+    
+    if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
+
+    await UserModel.updateOne({id}, {$set:{'paymentInfo.secretNumber': keyValue}})
+    .then(()=>{
+        res.status(200).send('ya');
+    }
+    ).catch(err => {
+        console.error(err.message);
+    res.status(500).send(`Error updating user's information`);
+    });
+};
 
