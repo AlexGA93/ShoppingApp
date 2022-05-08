@@ -6,12 +6,19 @@ import config from './config';
 //database
 require('./database/database');
 
+// roles
+import {createRoles} from './libs/initialSetup';
+
 // routes
 import databaseRoute from './routes/dbRoutes';
 import userRoutes from './routes/userRoutes';
 // const productRoutes = require('./routes/api/productRoutes');
 
 const app: Application = express();
+
+// roles creation
+createRoles();
+
 const port = config.PORT || 3000;
 
 app.use(morgan('dev'));

@@ -1,5 +1,6 @@
 import mongoose,{model} from 'mongoose';
-import { apiProductType } from '../../types/type';
+import { apUserType } from '../../types/type';
+import Schema from 'mongoose';
 
 const userSchema =  new mongoose.Schema({
     username: {
@@ -51,8 +52,15 @@ const userSchema =  new mongoose.Schema({
         secretNumber: {
             type: Number
         }
-    }
+    },
+    roles: [{
+        ref: "role",
+        type: Schema.Types.ObjectId
+    }]
+},{
+    timestamps: true,
+    versionKey: false
 });
 
-const UserModel = model<apiProductType>("user", userSchema);
+const UserModel = model<apUserType>("user", userSchema);
 export default UserModel;

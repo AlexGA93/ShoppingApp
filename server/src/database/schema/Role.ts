@@ -1,5 +1,6 @@
 
 import mongoose,{model, Schema} from 'mongoose';
+import { apiProductType } from '../../types/type';
 
 //types
 // import { apiProductType } from '../../types/type';
@@ -15,7 +16,5 @@ const roleSchema: Schema =  new mongoose.Schema(
     }
 );
 
-// export default productSchema;
-// const ProductModel = model<apiProductType>("Product", productSchema) ;
-// export default ProductModel;
-module.exports = mongoose.model('Role', roleSchema)
+const RoleModel = model<apiProductType>("role", roleSchema);
+export default RoleModel;

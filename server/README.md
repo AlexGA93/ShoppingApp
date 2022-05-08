@@ -294,3 +294,79 @@ export const verifyToken = async (
         
 }
 ```
+
+## 8. Roles
+We want to define a roles hierarchy tat an 'admin' or a 'moderator' could modify or delete a user or product, but not a 'user' one.
+
+This could be a simple example of role assignation in our app's route
+```
+roles: admin | user | seller
+
+get user-------> user
+
+post user-------> user
+
+update user-------> user
+
+delete user-------> user
+
+--------------------
+
+get product-------> user,admin,seller
+
+post product-------> admin, user, seller
+
+update product-------> admin, user, seller
+
+delete product-------> admin, user, seller
+```
+
+
+If we want to apply roles to our servers we have to define a couple of things in our middlewares and schema:
+
+- 1. Define a Role mongoose schema
+```
+const roleSchema: Schema =  new mongoose.Schema(
+    {
+        name: {
+            type: String
+        },
+    },
+    {
+        versionKey: false
+    }
+);
+
+const RoleModel = model<apiProductType>("role", roleSchema);
+export default RoleModel;
+```
+**Note**: We want to define three types of roles: 'user', 'moderator' and 'admin'.
+
+- 2. The next step is assign to our User's schema a role schema rfering to our "role" collection
+```
+const userSchema =  new mongoose.Schema({
+    ...
+    address: {
+        ...
+    },
+    paymentInfo: {
+        ...
+    },
+
+    roles: [{
+        ref: "role",
+        type: Schema.Types.ObjectId
+    }]
+},{
+    timestamps: true,
+    versionKey: false
+});
+```
+
+- 3. Functionallity
+
+If a user is not registered as 'admin' or 'moderator', our backend will assign to user's role array a 'user' id.
+
+In second place, if user is registered with any of the other two roles, our backend will add to MongoDB the user with those in the array field.
+
+- 4. Protect routes with roles and token

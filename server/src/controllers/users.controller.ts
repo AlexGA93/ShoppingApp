@@ -1,7 +1,4 @@
-// jwt
-import jwt from 'jsonwebtoken';
-// secret
-import config from '../config';
+
 //  import express
 import {Router, Request, Response} from 'express';
 // Defining Router
@@ -10,86 +7,17 @@ const dbRouter: Router = Router();
 import bcrypt from 'bcryptjs';
 // schema
 import UserModel from '../database/schema/User';
-// types
-import { apiProductType, apUserType } from '../types/type';
 
-                /* Authentication */
-export const signUp = async (req: Request, res: Response) => {
-    try {
-        // check if there is a user named as the entered one
-        let user = await UserModel.findOne({ email: req.body.email });
-        // console.log(user);
-        
-        if (user) {
-            res.status(400).json({ errors: [{ msg: "User already exists" }] });
-        } 
-        
-        // hash password
-        const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-        
-        let userInfo:apUserType = {
-            username: req.body.username,
-            email: req.body.email,
-            password: hashedPassword,
-            age: req.body.age,
-            address: {
-                street: req.body.address.street,
-                zip: req.body.address.zip,
-                region: req.body.address.region,
-                city: req.body.address.city,
-                country: req.body.address.country
-            },
-            paymentInfo: {
-                bankName: req.body.paymentInfo.bankName,
-                accountNumber: req.body.paymentInfo.accountNumber,
-                secretNumber: req.body.paymentInfo.secretNumber 
-            }
-        }
+                /* Obtain User */
+export const getUser = async(req: Request, res: Response) => {
+    // find user by id
+    let id = req.params.id;
 
-        user = new UserModel(userInfo);
-
-        const savedUser = await user.save();
-
-        // sign jwt
-        jwt.sign({id: savedUser._id}, config.SECRET ,{expiresIn: 3600}, (err, token) => {
-            if (err) throw err;
-            // return token
-            res.status(200).send({token});
-            return; // to prevent 'ERR_HTTP_HEADERS_SENT'
-        });
-
-
-    } catch (err: any) {
-        console.error(err.message);
-        res.status(500).send("Error during Registration process");
-    }
-};
-
-export const signIn = async (req: Request, res: Response) => {
-
-    try {
-        const {email, password} = req.body;
-        
-        let user: apUserType | null = await UserModel.findOne({email});
-        // check if user exists
-        if(!user) res.status(400).json({ errors: [{ msg: "User not registered" }] });
-        
-        // compare passwords
-        const isMatch = await bcrypt.compare(password, (user?.password as string));
-
-        if (!isMatch) res.status(400).json({ errors: [{ msg: "Invalid Password" }] });
-        
-        // jwt
-        jwt.sign({id: user?._id}, config.SECRET ,{expiresIn: 3600}, (err, token) => {
-            if (err) throw err;
-            // return token
-            res.status(200).send({token});
-            return; // to prevent 'ERR_HTTP_HEADERS_SENT'
-        });
-    } catch (err: any) {
-        console.error(err.message)
-        res.status(500).send('Error during Login process')
-    }
+    let user = await UserModel.findById(id);
+    console.log(user);
+    
+    return res.status(200).send(user);
+    
 };
 
                 /* Credentials Modification */
@@ -316,3 +244,18 @@ export const editPaymentSecretNumInfo= async(req: Request, res: Response) => {
     });
 };
 
+                /* Delete User */
+export const deleteUser = async(req: Request, res: Response) => {
+    // extract user's id
+    let id = req.params.id;
+
+    // find user 
+    await UserModel
+    .deleteOne({_id:id})
+    .then( () => res.status(200).json({msg: "User deleted"}) )
+    .catch( err => {
+        console.log('err');
+        return res.status(500).send({msg: "Error has ocurred during user delete process"})
+        
+    })
+};
