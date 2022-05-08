@@ -11,7 +11,12 @@ export declare interface apiProductType {
     }
 }
 
-export declare interface apUserType {
+export declare interface RoleType {
+    _id: string,
+    name: string
+};
+
+export declare interface apUserType extends mongoose.Document {
     _id?: string,
     username: string,
     email: string,
@@ -28,13 +33,15 @@ export declare interface apUserType {
         bankName: string,
         accountNumber: string,
         secretNumber: number
-    }
+    },
+    roles?: string[],
 }
 
 export declare interface Config {
     MONGO_URI?: string,
     PORT?: string,
-    SECRET: string
+    SECRET: string,
+    EXPIRATION_DATE: number
 };
 
 export interface RequestType {
