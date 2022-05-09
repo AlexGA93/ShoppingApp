@@ -8,13 +8,12 @@ import UserModel from '../database/schema/User';
 
                 /* Obtain User */
 export const getUser = async(req: Request, res: Response) => {
-    // find user by id
     let id = req.params.id;
 
-    let user = await UserModel.findById(id);
-    console.log(user);
-    
-    return res.status(200).send(user);
+    await UserModel
+    .findById(id)
+    .then( user => res.status(200).json(user))
+    .catch( err => res.status(500).json({msg:err.message}));
     
 };
 
