@@ -1,10 +1,8 @@
+import mongoose,{model} from 'mongoose';
+import { apiProductType } from '../../types/type';
+// import Schema from 'mongoose';
 
-import mongoose,{model, Schema} from 'mongoose';
-
-//types
-// import { apiProductType } from '../../types/type';
-
-const productSchema: Schema =  new mongoose.Schema({
+const productSchema =  new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -33,11 +31,6 @@ const productSchema: Schema =  new mongoose.Schema({
         type: Boolean,
         // required: true
     },
-    roles: [{
-        ref: "Role",
-        type: Schema.Types.ObjectId
-    }],
-
     rating: {
         rate: {
             type: Number,
@@ -61,7 +54,5 @@ const productSchema: Schema =  new mongoose.Schema({
 }
 );
 
-// export default productSchema;
-// const ProductModel = model<apiProductType>("Product", productSchema) ;
-// export default ProductModel;
-module.exports = mongoose.model('products', productSchema)
+const ProductModel = model<apiProductType>("product", productSchema);
+export default ProductModel;

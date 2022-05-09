@@ -1,5 +1,5 @@
 import mongoose,{model} from 'mongoose';
-import { apUserType } from '../../types/type';
+import { apiUserType } from '../../types/type';
 import Schema from 'mongoose';
 
 const userSchema =  new mongoose.Schema({
@@ -62,5 +62,5 @@ const userSchema =  new mongoose.Schema({
     versionKey: false
 });
 
-const UserModel = model<apUserType>("user", userSchema);
+const UserModel = model<apiUserType>("user", userSchema);
 export default UserModel;

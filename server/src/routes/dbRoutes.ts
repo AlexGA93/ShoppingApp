@@ -1,13 +1,16 @@
-import express, {Router, Request, Response} from 'express';
+//  import express
+import {Router} from 'express';
 // Defining Router
 const dbRouter: Router = Router();
 
-import { authJWT } from '../middleware';
-
 // controllers
+import * as authMethods from '../controllers/auth.controller';
 import * as dbMethods from '../controllers/db.controller'
 
-dbRouter.get('/products',[authJWT.verifyToken, authJWT.isAdmin],dbMethods.updateDb);
+// middleware to protect routes
+import { authJWT } from '../middleware';
+
+dbRouter.get('/products',dbMethods.updateDb);
 
 export default dbRouter;
 

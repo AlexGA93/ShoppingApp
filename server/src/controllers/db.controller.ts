@@ -1,10 +1,8 @@
 import axios from 'axios';
 //  import express
 import express, {Router, Request, Response} from 'express';
-// Defining Router
-const dbRouter: Router = Router();
 
-const Product = require('../database/schema/Product');
+import Product from '../database/schema/Product';
 
 import { apiProductType } from '../types/type';
 
@@ -14,9 +12,10 @@ export const updateDb = async (req:Request, res:Response) => {
     //axios api call
     var dataProduct = await axios.get<apiProductType[]>(apiUrl);
 
+    console.log(dataProduct);
+    
     // express post request to insert in mongo database
     dataProduct.data.forEach( (element: apiProductType) => {
-
         // defining a new product model to store
         var productDetails = new Product({
             id: element._id,
@@ -32,6 +31,9 @@ export const updateDb = async (req:Request, res:Response) => {
                 count: element.rating.count
             }
         });
+
+        // console.log(productDetails);
+        
         // store in MongoDB
         productDetails.save();
     });

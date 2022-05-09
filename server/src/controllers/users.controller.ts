@@ -1,8 +1,6 @@
 
 //  import express
 import {Router, Request, Response} from 'express';
-// Defining Router
-const dbRouter: Router = Router();
 // bcryptjs
 import bcrypt from 'bcryptjs';
 // schema

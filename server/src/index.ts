@@ -12,7 +12,7 @@ import {createRoles} from './libs/initialSetup';
 // routes
 import databaseRoute from './routes/dbRoutes';
 import userRoutes from './routes/userRoutes';
-// const productRoutes = require('./routes/api/productRoutes');
+import productRoutes from './routes/productRoutes';
 
 const app: Application = express();
 
@@ -32,7 +32,7 @@ app.get('/', (req: Request, res: Response): void => {
 // routes
 app.use('/api/admin', databaseRoute);
 app.use('/api/users', userRoutes);
-// app.use('/products', productRoutes);
+app.use('/api/products', productRoutes);
 
 app.listen(port, (): void => {
   return console.log(`Express is listening at http://localhost:${port}`);
