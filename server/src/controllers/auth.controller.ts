@@ -42,9 +42,6 @@ export const signUp = async (req: Request, res: Response) => {
     } = req.body.paymentInfo;
 
     try {
-        // check if there is a user named as the entered one
-        // let user = await UserModel.findOne({email});
-        // console.log(user);
         
         if (await UserModel.findOne({email})) {
             res.status(400).json({ errors: [{ msg: "User already exists" }] });
@@ -52,25 +49,6 @@ export const signUp = async (req: Request, res: Response) => {
         
         // hash password
         const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-        
-        // let userInfo:apUserType = {
-        //     username: username,
-        //     email: email,
-        //     password: hashedPassword,
-        //     age: age,
-        //     address: {
-        //         street: street,
-        //         zip: zip,
-        //         region: region,
-        //         city: city,
-        //         country: country
-        //     },
-        //     paymentInfo: {
-        //         bankName: bankName,
-        //         accountNumber: accountNumber,
-        //         secretNumber: secretNumber 
-        //     }
-        // }
 
         const newUser = new UserModel<apiUserType>({
             username,
