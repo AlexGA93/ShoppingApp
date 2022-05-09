@@ -3,8 +3,9 @@ import {Router} from 'express';
 // Defining Router
 const dbRouter: Router = Router();
 
-import * as userMethods from '../controllers/users.controller';
+// controllers
 import * as authMethods from '../controllers/auth.controller';
+import * as userMethods from '../controllers/users.controller';
 
 // middleware to protect routes
 import { authJWT } from '../middleware';
@@ -15,7 +16,7 @@ dbRouter.post('/signup', authMethods.signUp);
 // login
 dbRouter.post('/signin', authMethods.signIn);
 
-                /* Authentication */
+                /* user */
 dbRouter.get('/me/:id',authJWT.verifyToken, userMethods.getUser);
 
                 /* Credentials Modification */

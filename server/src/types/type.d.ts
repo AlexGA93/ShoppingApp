@@ -1,12 +1,14 @@
-export declare interface apiProductType {
-    private _id: number,
+export declare interface apiProductType extends mongoose.Document{
+    private _id?: string,
     title: string,
     price: number,
     description: string,
     category: string,
     image: string,
+    favorite: boolean,
     rating: {
         rate: number,
+        qty: number,
         count: number
     }
 }
@@ -16,8 +18,8 @@ export declare interface RoleType {
     name: string
 };
 
-export declare interface apUserType extends mongoose.Document {
-    _id?: string,
+export declare interface apiUserType extends mongoose.Document {
+    private _id?: string,
     username: string,
     email: string,
     password: string,

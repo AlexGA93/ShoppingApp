@@ -11,7 +11,7 @@ import bcrypt from 'bcryptjs';
 // schema
 import UserModel from '../database/schema/User';
 // types
-import { apUserType, RoleType } from '../types/type';
+import { apiUserType, RoleType } from '../types/type';
 import RoleModel from '../database/schema/Role';
 
 
@@ -72,7 +72,7 @@ export const signUp = async (req: Request, res: Response) => {
         //     }
         // }
 
-        const newUser = new UserModel<apUserType>({
+        const newUser = new UserModel<apiUserType>({
             username,
             email,
             password: hashedPassword,
@@ -137,7 +137,7 @@ export const signIn = async (req: Request, res: Response) => {
     try {
         const {email, password}:{email: string, password: string} = req.body;
         
-        let user: apUserType | null = await UserModel.findOne({email});
+        let user: apiUserType | null = await UserModel.findOne({email});
         // console.log(user);
         
         
