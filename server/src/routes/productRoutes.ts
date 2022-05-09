@@ -14,5 +14,6 @@ import { authJWT } from '../middleware';
 
 // get all products
 dbRouter.get('/all', productMethods.getProducts);
+dbRouter.get('/product/:id', productMethods.getProductById);
 
 export default dbRouter;

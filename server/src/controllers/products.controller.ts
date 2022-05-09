@@ -6,9 +6,20 @@ import bcrypt from 'bcryptjs';
 import ProductModel from '../database/schema/Product';
 
 
-export const getProducts = async(req: Request, res: Response) => {
-    let all = await ProductModel.find({});
+export const getProducts = async(req: Request, res: Response) => await ProductModel
+    .find({})
+    .then( products => res.status(200).json(products))
+    .catch( err => res.status(500).json({msg:err.message}));
 
-    return res.status(200).json(all);
+export const getProductById = async(req: Request, res: Response) => {
+    
+    let id = req.params.id;
+    console.log(id);
+    
+
+    await ProductModel
+    .findById(id)
+    .then( products => res.status(200).json(products))
+    .catch( err => res.status(500).json({msg:err.message}));
     
 };
