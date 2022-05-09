@@ -4,6 +4,7 @@ import {Router, Request, Response} from 'express';
 import bcrypt from 'bcryptjs';
 // schema
 import ProductModel from '../database/schema/Product';
+import { apiProductType } from '../types/type';
 
 
 export const getProducts = async(req: Request, res: Response) => await ProductModel
@@ -23,3 +24,10 @@ export const getProductById = async(req: Request, res: Response) => {
     .catch( err => res.status(500).json({msg:err.message}));
     
 };
+
+export const getProductByCategory = async(req: Request, res: Response) => await ProductModel
+    .find({category:req.params.category})
+    .then( (filteredProducts: apiProductType[]) => res.status(200).json(filteredProducts))
+    .catch( err => res.status(500).json({msg:err.message}));
+    
+    
