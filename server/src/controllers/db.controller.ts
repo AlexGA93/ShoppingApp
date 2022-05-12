@@ -11,8 +11,6 @@ export const updateDb = async (req:Request, res:Response) => {
     const apiUrl: string = 'https://fakestoreapi.com/products';
     //axios api call
     var dataProduct = await axios.get<apiProductType[]>(apiUrl);
-
-    console.log(dataProduct);
     
     // express post request to insert in mongo database
     dataProduct.data.forEach( (element: apiProductType) => {
@@ -31,8 +29,6 @@ export const updateDb = async (req:Request, res:Response) => {
                 count: element.rating.count
             }
         });
-
-        // console.log(productDetails);
         
         // store in MongoDB
         productDetails.save();
