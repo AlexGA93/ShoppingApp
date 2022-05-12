@@ -19,7 +19,7 @@ dbRouter.get('/product/favorites/all', productMethods.getFavoritesProducts);
 // add a new product - Admin OR seller
 dbRouter.post('/',[
     authMiddleware.verifyToken, 
-    authMiddleware.isAdmin || authMiddleware.isSeller
+    authMiddleware.isAdmin //|| authMiddleware.isSeller
 ],productMethods.addNewProduct);
 
 // modify favorite field -> admin

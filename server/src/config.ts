@@ -11,7 +11,7 @@ let configuration: Config = {
     SECRET:'VIKINGZ-Shop',
     EXPIRATION_DATE:3600
 };
-    // SECRET:crypto.randomBytes(9).toString('base64')
+// SECRET:crypto.randomBytes(9).toString('base64')
 // };
 
 export default configuration;
