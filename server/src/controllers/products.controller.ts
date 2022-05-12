@@ -94,3 +94,127 @@ export const changeFavoriteProduct = async(req: Request, res: Response) => {
     .catch( err => res.status(500).json({msg:err.message}) )
 };
 
+export const changeProductTitle = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let newTitle = req.body.title;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {$set:{'title': newTitle}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductPrice = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let price = req.body.price;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {$set:{'price': price}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductDesc = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let desc = req.body.desc;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {$set:{'description': desc}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductCat = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let category = req.body.category;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {$set:{'category': category}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductImg = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let img = req.body.img;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {$set:{'image': img}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductRate = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let rate = req.body.rate;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {'$set':{'rating.rate':rate}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductQty = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let qty = req.body.qty;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {'$set':{'rating.qty':qty}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const changeProductCount = async(req: Request, res: Response) => {
+    let id = req.params.id;
+    let count = req.body.count;
+    
+    let foundedProduct = await ProductModel.findById(id);
+
+    if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
+
+    await ProductModel
+    .updateOne({id}, {'$set':{'rating.count':count}})
+    .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) )
+    
+};
+
+export const deleteProduct = async(req: Request, res: Response) => await ProductModel
+    .deleteOne({_id:req.params.id})
+    .then( () => res.status(200).json({msg:'Product deleted succesfully'}) )
+    .catch( err => res.status(500).json({msg:err.message}) );

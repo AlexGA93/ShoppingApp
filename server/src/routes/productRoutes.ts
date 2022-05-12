@@ -4,12 +4,9 @@ import { Router } from 'express';
 const dbRouter: Router = Router();
 
 // controllers
-import * as authMethods from '../controllers/auth.controller';
 import * as productMethods from '../controllers/products.controller';
-
-
 // middleware
-import { authJWT } from '../middleware';
+import * as  authMiddleware from '../middleware/authJWT';
 
 
 // get all products
@@ -18,21 +15,31 @@ dbRouter.get('/product/_id/:id', productMethods.getProductById);
 dbRouter.get('/product/category/:category', productMethods.getProductByCategory);
 dbRouter.get('/product/rating/:rating', productMethods.getProductByRating);
 dbRouter.get('/product/favorites/all', productMethods.getFavoritesProducts);
-// add a new product - Admin
-dbRouter.post('/', productMethods.addNewProduct);
-// modify favorite field
-dbRouter.put('/product/update/fav/:id', productMethods.changeFavoriteProduct);
-// modify product data - Admin
-dbRouter.put('/product/update/title/:title');
-dbRouter.put('/product/update/price/:price');
-dbRouter.put('/product/update/desc/:description');
-dbRouter.put('/product/update/category/:category');
-dbRouter.put('/product/update/img/:image');
-dbRouter.put('/product/update/rating/rate/:rate');
-dbRouter.put('/product/update/rating/qty/:qty');
-dbRouter.put('/product/update/rating/count/:count');
-// delete a product - admin
 
+// add a new product - Admin OR seller
+dbRouter.post('/',[
+    authMiddleware.verifyToken, 
+    authMiddleware.isAdmin || authMiddleware.isSeller
+],productMethods.addNewProduct);
+
+// modify favorite field -> admin
+dbRouter.put('/product/update/fav/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin], productMethods.changeFavoriteProduct);
+
+// modify product data - Admin
+dbRouter.put('/product/update/title/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductTitle);
+dbRouter.put('/product/update/price/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductPrice);
+dbRouter.put('/product/update/desc/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductDesc);
+dbRouter.put('/product/update/category/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductCat);
+dbRouter.put('/product/update/img/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductImg);
+dbRouter.put('/product/update/rating/rate/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductRate);
+dbRouter.put('/product/update/rating/qty/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductQty);
+dbRouter.put('/product/update/rating/count/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin],productMethods.changeProductCount);
+
+// delete a product - admin and seller
+dbRouter.delete('/product/_id/:id',[
+    authMiddleware.verifyToken, 
+    authMiddleware.isAdmin || authMiddleware.isSeller
+],productMethods.deleteProduct)
 
 
 export default dbRouter;

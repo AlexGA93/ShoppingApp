@@ -4,13 +4,12 @@ import {Router} from 'express';
 const dbRouter: Router = Router();
 
 // controllers
-import * as authMethods from '../controllers/auth.controller';
-import * as dbMethods from '../controllers/db.controller'
+import * as dbMethods from '../controllers/db.controller';
+// middlewares
+import * as  authMiddleware from '../middleware/authJWT';
 
-// middleware to protect routes
-import { authJWT } from '../middleware';
-
-dbRouter.get('/products',dbMethods.updateDb);
+// admin only route
+dbRouter.get('/products',[authMiddleware.verifyToken, authMiddleware.isAdmin],dbMethods.updateDb);
 
 export default dbRouter;
 

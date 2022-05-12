@@ -21,6 +21,7 @@ export const verifyToken = async (
     ) => {
        try {
         const token: RequestType = req.headers;
+        
         // check headers
         let secret = config.SECRET;
         
@@ -29,11 +30,9 @@ export const verifyToken = async (
         
         // check if there's a valid token extracting token's info        
         const decoded = jwt.verify((token['x-access-token'] ?? ''), secret) as decodedType;        
-
+        
         // check if user exists by id
         const user = await UserModel.findById(decoded.id, {password:0});
-        // console.log(user);
-        
         
         if(!user) return res.status(404).json({message:'user not found'})
         
@@ -53,14 +52,25 @@ export const isAdmin = async (
     res: Response, 
     next: NextFunction
     ) => {
-        let id = req.params.id;
+        // let id = req.params.id;
+        // console.log(id);
+
+        const token: RequestType = req.headers;
+        
+        // check headers
+        let secret = config.SECRET;
+        
+        //check if there's token
+        if(!token) res.status(403).json({message:"No token provided"});
+        
+        // check if there's a valid token extracting token's info        
+        const decoded = jwt.verify((token['x-access-token'] ?? ''), secret) as decodedType; 
         
         // fing user by id
-        const user = await UserModel.findById({_id:id});
+        const user = await UserModel.findById({_id:decoded.id});
         
         // check roles
-        const roles: RoleType[] = await RoleModel.find({_id:{$in: user?.roles}});
-        console.log(roles);
+        const roles: RoleType[] = await RoleModel.find({_id:{$in: user?.roles}});;
 
         // role validation
         for(let i=0; i<roles.length ;i++){

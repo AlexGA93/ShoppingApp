@@ -7,15 +7,11 @@ import bcrypt from 'bcryptjs';
 import UserModel from '../database/schema/User';
 
                 /* Obtain User */
-export const getUser = async(req: Request, res: Response) => {
-    let id = req.params.id;
-
-    await UserModel
-    .findById(id)
+export const getUser = async(req: Request, res: Response) => await UserModel
+    .findById({_id:req.params.id})
     .then( user => res.status(200).json(user))
     .catch( err => res.status(500).json({msg:err.message}));
-    
-};
+
 
                 /* Credentials Modification */
 export const editUsername= async(req: Request, res: Response) => {
@@ -30,7 +26,7 @@ export const editUsername= async(req: Request, res: Response) => {
 
     await UserModel
     .findByIdAndUpdate(id,{username:keyValue})
-    .then(user => {
+    .then(() => {
         res.status(200).send('User credentials has been updated');
     })
     .catch(err => {
@@ -40,7 +36,7 @@ export const editUsername= async(req: Request, res: Response) => {
 };
 export const editEmail= async(req: Request, res: Response) => {
 
-    let flagKey = Object.entries(req.body)[0][0]; // key
+    let flagKey = Object.keys(req.body)[0]; // key
     let keyValue = req.body[flagKey]; // value
     let id = req.params.id;
 
@@ -94,9 +90,9 @@ export const editAddressStreetInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'address.street': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'address.street': keyValue}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -114,7 +110,7 @@ export const editAddressZipInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'address.zip': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'address.zip': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -134,7 +130,7 @@ export const editAddressRegionInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'address.region': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'address.region': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -154,7 +150,7 @@ export const editAddressCityInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'address.city': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'address.city': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -174,7 +170,7 @@ export const editAddressCountryInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'address.country': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'address.country': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -195,7 +191,7 @@ export const editPaymentBankNameInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'paymentInfo.bankName': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'paymentInfo.bankName': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -213,7 +209,7 @@ export const editPaymentAccountNumInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'paymentInfo.accountNumber': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'paymentInfo.accountNumber': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -231,7 +227,7 @@ export const editPaymentSecretNumInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {$set:{'paymentInfo.secretNumber': keyValue}})
+    await UserModel.updateOne({id}, {'$set':{'paymentInfo.secretNumber': keyValue}})
     .then(()=>{
         res.status(200).send('ya');
     }
@@ -242,17 +238,10 @@ export const editPaymentSecretNumInfo= async(req: Request, res: Response) => {
 };
 
                 /* Delete User */
-export const deleteUser = async(req: Request, res: Response) => {
-    // extract user's id
-    let id = req.params.id;
-
-    // find user 
-    await UserModel
-    .deleteOne({_id:id})
+export const deleteUser = async(req: Request, res: Response) => await UserModel
+    .deleteOne({_id:req.params.id})
     .then( () => res.status(200).json({msg: "User deleted"}) )
     .catch( err => {
         console.log('err');
-        return res.status(500).send({msg: "Error has ocurred during user delete process"})
-        
-    })
-};
+        return res.status(500).send({msg: "Error has ocurred during user delete process"}) 
+    });
