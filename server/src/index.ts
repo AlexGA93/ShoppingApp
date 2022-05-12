@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response): void => {
-  res.send('Hello World!');
+  res.send('Welcome to Vikingz Store Server!');
 });
 
 // routes

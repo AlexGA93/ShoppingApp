@@ -58,3 +58,7 @@ export interface RequestType {
 export declare interface decodedType {
     id: string
 }
+
+export declare interface errorType {
+    message: string
+}

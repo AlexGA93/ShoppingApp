@@ -15,5 +15,5 @@ mongoose.connect(
         useUnifiedTopology: true,
     }
 )
-.then( () => console.log(`Connected to Vikingz's Mongo cluster`))
+.then( (): void => console.log(`Connected to Vikingz's Mongo cluster`))
 .catch( (err:string) => console.log(err))
