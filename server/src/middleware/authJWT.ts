@@ -109,3 +109,40 @@ export const isSeller = async (
 
         return res.status(403).json({message: "Requer Seller role"});
     };
+
+export const areBoth = async (
+        req: Request, 
+        res: Response, 
+        next: NextFunction
+        ) => {
+            // let id = req.params.id;
+            // console.log(id);
+    
+            const token: RequestType = req.headers;
+            
+            // check headers
+            let secret = config.SECRET;
+            
+            //check if there's token
+            if(!token) res.status(403).json({message:"No token provided"});
+            
+            // check if there's a valid token extracting token's info        
+            const decoded = jwt.verify((token['x-access-token'] ?? ''), secret) as decodedType; 
+            
+            // fing user by id
+            const user = await UserModel.findById({_id:decoded.id});
+            
+            // check roles
+            const roles: RoleType[] = await RoleModel.find({_id:{$in: user?.roles}});;
+    
+            // role validation
+            for(let i=0; i<roles.length ;i++){
+                if(roles[i].name === 'admin' || roles[i].name === 'seller'){
+                //     console.log(roles[i].name);
+                    next();
+                    return;
+                }
+            }
+    
+            return res.status(403).json({message: "Requer Admin role"});
+        };
