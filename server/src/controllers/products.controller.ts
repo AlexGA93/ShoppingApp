@@ -89,7 +89,7 @@ export const changeFavoriteProduct = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'favorite': !foundedProduct?.favorite}})
+    .updateOne({_id:id}, {$set:{'favorite': !foundedProduct?.favorite}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
 };
@@ -103,7 +103,7 @@ export const changeProductTitle = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'title': newTitle}})
+    .updateOne({_id:id}, {$set:{'title': newTitle}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -118,7 +118,7 @@ export const changeProductPrice = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'price': price}})
+    .updateOne({_id:id}, {$set:{'price': price}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -133,7 +133,7 @@ export const changeProductDesc = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'description': desc}})
+    .updateOne({_id:id}, {$set:{'description': desc}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -148,7 +148,7 @@ export const changeProductCat = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'category': category}})
+    .updateOne({_id:id}, {$set:{'category': category}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -163,7 +163,7 @@ export const changeProductImg = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {$set:{'image': img}})
+    .updateOne({_id:id}, {$set:{'image': img}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -178,7 +178,7 @@ export const changeProductRate = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {'$set':{'rating.rate':rate}})
+    .updateOne({_id:id}, {$set:{'rating.rate':rate}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -193,7 +193,7 @@ export const changeProductQty = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {'$set':{'rating.qty':qty}})
+    .updateOne({_id:id}, {$set:{'rating.qty':qty}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
@@ -208,7 +208,7 @@ export const changeProductCount = async(req: Request, res: Response) => {
     if(!foundedProduct) res.status(400).json({errors:[{msg:`Product don't found`}]});
 
     await ProductModel
-    .updateOne({id}, {'$set':{'rating.count':count}})
+    .updateOne({_id:id}, {$set:{'rating.count':count}})
     .then( () => res.status(200).json({msg:'Product edited succesfully'}) )
     .catch( err => res.status(500).json({msg:err.message}) )
     
