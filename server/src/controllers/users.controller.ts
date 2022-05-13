@@ -83,14 +83,18 @@ export const editAddressStreetInfo= async(req: Request, res: Response) => {
     
     
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let street = req.body[flagKey]; // value
     let id = req.params.id;
 
+    
+
     let user = await UserModel.findById(id);
+    console.log(user);
+    
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'address.street': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'address.street':street}})
     .then(()=>{
         res.status(200).send('User address street successfully edited!');
     }
@@ -103,16 +107,16 @@ export const editAddressZipInfo= async(req: Request, res: Response) => {
     
     
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let zip = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'address.zip': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'address.zip': zip}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -130,9 +134,9 @@ export const editAddressRegionInfo= async(req: Request, res: Response) => {
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'address.region': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'address.region': keyValue}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -143,16 +147,16 @@ export const editAddressCityInfo= async(req: Request, res: Response) => {
     
     
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let city = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'address.city': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'address.city': city}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -163,16 +167,16 @@ export const editAddressCountryInfo= async(req: Request, res: Response) => {
     
     
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let country = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'address.country': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'address.country': country}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -184,16 +188,16 @@ export const editAddressCountryInfo= async(req: Request, res: Response) => {
 export const editPaymentBankNameInfo= async(req: Request, res: Response) => {
     
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let bankName = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'paymentInfo.bankName': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'paymentInfo.bankName': bankName}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -202,16 +206,16 @@ export const editPaymentBankNameInfo= async(req: Request, res: Response) => {
 };
 export const editPaymentAccountNumInfo= async(req: Request, res: Response) => {
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let numInfo = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'paymentInfo.accountNumber': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'paymentInfo.accountNumber': numInfo}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
@@ -220,16 +224,16 @@ export const editPaymentAccountNumInfo= async(req: Request, res: Response) => {
 };
 export const editPaymentSecretNumInfo= async(req: Request, res: Response) => {
     let flagKey = Object.keys(req.body)[0]; // key
-    let keyValue = req.body[flagKey]; // value
+    let secretNum = req.body[flagKey]; // value
     let id = req.params.id;
 
     let user = await UserModel.findById(id);
     
     if (!user) res.status(400).json({errors:[{msg:`User don't found`}]});
 
-    await UserModel.updateOne({id}, {'$set':{'paymentInfo.secretNumber': keyValue}})
+    await UserModel.updateOne({_id:id}, {$set:{'paymentInfo.secretNumber': secretNum}})
     .then(()=>{
-        res.status(200).send('ya');
+        res.status(200).send('User address street successfully edited!');
     }
     ).catch(err => {
         console.error(err.message);
