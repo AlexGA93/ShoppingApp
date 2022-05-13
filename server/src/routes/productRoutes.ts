@@ -17,10 +17,7 @@ dbRouter.get('/product/rating/:rating', productMethods.getProductByRating);
 dbRouter.get('/product/favorites/all', productMethods.getFavoritesProducts);
 
 // add a new product - Admin OR seller
-dbRouter.post('/',[
-    authMiddleware.verifyToken, 
-    authMiddleware.isAdmin //|| authMiddleware.isSeller
-],productMethods.addNewProduct);
+dbRouter.post('/',[authMiddleware.verifyToken, authMiddleware.areBoth],productMethods.addNewProduct);
 
 // modify favorite field -> admin
 dbRouter.put('/product/update/fav/:id',[authMiddleware.verifyToken, authMiddleware.isAdmin], productMethods.changeFavoriteProduct);
